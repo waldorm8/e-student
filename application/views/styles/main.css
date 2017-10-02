@@ -188,18 +188,18 @@ body{
 @media (max-width: 1800px) {
     .left-box{
         height:450px;
-        width:350px;
+        width:300px;
     }
     .right-box{
         height:450px;
-        width:350px;
+        width:300px;
     }
     .right-box h3{
         font-size: 20px;
-        margin:80px 0px 0px 50px
+        margin:80px 0px 0px 30px
     }
     .right-box form{
-        margin:80px 0px 0px 50px;
+        margin:80px 0px 0px 30px;
     }
     .left-box .student{
         background: url(../images/student150x115.jpg);
