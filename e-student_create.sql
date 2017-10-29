@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2017-06-19 11:03:51.612
+-- Last modification date: 2017-10-22 15:42:57.818
 
 -- tables
 -- Table: academic
@@ -64,6 +64,7 @@ CREATE TABLE student (
     st_email varchar(64) NOT NULL,
     st_role char(1) NOT NULL,
     study_way_sw_id int NOT NULL,
+    academic_ac_id int NOT NULL,
     CONSTRAINT id_user PRIMARY KEY (st_id)
 ) COMMENT 'All of app users.';
 
@@ -115,6 +116,10 @@ ALTER TABLE exam ADD CONSTRAINT exam_subject FOREIGN KEY exam_subject (subject_s
 -- Reference: exam_user (table: exam)
 ALTER TABLE exam ADD CONSTRAINT exam_user FOREIGN KEY exam_user (student_st_id)
     REFERENCES student (st_id);
+
+-- Reference: student_academic (table: student)
+ALTER TABLE student ADD CONSTRAINT student_academic FOREIGN KEY student_academic (academic_ac_id)
+    REFERENCES academic (ac_id);
 
 -- Reference: student_study_way (table: student)
 ALTER TABLE student ADD CONSTRAINT student_study_way FOREIGN KEY student_study_way (study_way_sw_id)

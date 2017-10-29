@@ -100,6 +100,12 @@ body{
     background: url(../images/bg.png);
     font-family: 'Encode Sans Expanded', sans-serif;
 }
+input.invalid, textarea.invalid{
+    border: 3px solid red;
+}
+input.valid, textarea.valid{
+    border: 3px solid green;
+}
 .clr{
     clear:both;
 }
@@ -176,16 +182,40 @@ body{
     -moz-box-shadow: 4px 1px 19px -1px rgba(0,0,0,0.5);
     box-shadow: 4px 1px 19px -1px rgba(0,0,0,0.5);
 }
+.f-login{
+    margin:0px auto;
+    width: 280px;
+    padding-top:120px;
+}
+.f-register{
+    margin:0px auto;
+    width:300px;
+    padding-top:20px;
+}
 .right-box h3{
     font-family: 'Encode Sans Expanded', sans-serif;
     font-size: 25px;
-    margin:150px 0px 0px 70px
+    margin:80px 0px 0px 50px;
+    cursor:pointer;
 }
-.right-box form{
-    width: 250px;
-    margin:100px 0px 0px 70px;
+.right-box h3 span:hover{
+    color:#63D5C4;
 }
-@media (max-width: 1800px) {
+.right-box .bt-login{
+    color:#63D5C4;
+}
+#password{
+    width:220px;
+    display:inline;
+}
+#reg-password{
+    width: 220px;
+    display:inline;
+}
+img.visibility{
+    cursor:pointer;
+}
+@media screen and (max-width: 1440px) {
     .left-box{
         height:450px;
         width:300px;
@@ -195,11 +225,8 @@ body{
         width:300px;
     }
     .right-box h3{
-        font-size: 20px;
-        margin:80px 0px 0px 30px
-    }
-    .right-box form{
-        margin:80px 0px 0px 30px;
+        font-size: 16px;
+        margin:50px 0px 0px 30px
     }
     .left-box .student{
         background: url(../images/student150x115.jpg);
@@ -213,8 +240,59 @@ body{
     .left-box h1{
         font-size:38px;
     }
+    .f-login{
+        margin:0px auto;
+        padding-top:80px;
+        width:220px;
+    }
+    input#password{
+        width:180px;
+    }
+    .f-register{
+        margin:0px auto;
+        padding-top:5px;
+        width:230px;
+    }
+    input#reg-password{
+        width:200px;
+    }
 }
+@media screen and (max-width: 1366px) {
+    .left-box{
+        height:450px;
+        width:260px;
+    }
+    .right-box{
+        height:450px;
+        width:260px;
+    }
+    .right-box h3{
+        font-size: 16px;
+        margin:50px 0px 0px 30px
+    }
+    .left-box .student{
+        background: url(../images/student150x115.jpg);
+        width:150px;
+        height:115px;
+        box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    }
+    .left-box h2{
+        font-size: 23px;
+    }
+    .left-box h1{
+        font-size:35px;
+    }
+    .f-login{
+        margin:0px auto;
+        padding-top:80px;
+        width:220px;
+    }
+    input#password{width:180px;}
+    .f-register{
 
+    }
+
+}
 @media (max-width: 320px) {
     .left-box{
         display:none;
@@ -226,9 +304,6 @@ body{
     .right-box h3{
         margin:70px 0px 0px 20px
     }
-    .right-box form{
-        margin:70px 0px 0px 20px;
-    }
 }
 @media (max-width: 1024px) {
     .left-box{
@@ -239,34 +314,9 @@ body{
         width:300px;
     }
     .right-box h3{
-        margin:70px 0px 0px 20px
-    }
-    .right-box form{
-        margin:70px 0px 0px 20px;
+        margin:50px 0px 0px 20px
     }
 }
-
-@media (max-width: 1000px) { /*smartphones, tablets*/
-    .left-box{
-        display: none;
-    }
-    .right-box{
-        border-radius:10px 10px 10px 10px;
-    }
-    .right-box h3{
-        margin:70px 0px 0px 20px
-    }
-    .right-box form{
-        margin:70px 0px 0px 20px;
-    }
-}
-
-
-
-
-
-
-
 
 
 /* ==========================================================================
