@@ -45,7 +45,7 @@ class Login extends CI_Controller {
 
 				$this->session->set_flashdata('success', 'Logowanie przebiegło pomyśłnie!');
 
-				$this -> load -> view('dashboard');
+				redirect('dashboard');
 			}
 			else{
 				$this->session->set_flashdata('error', 'Podany login lub hasło są nieprawidłowe.');
