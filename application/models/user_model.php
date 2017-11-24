@@ -7,10 +7,51 @@ class User_model extends CI_Model {
 
 	public function login($login, $password){
 
-		$where = "st_email = '".$login."' OR st_login = '".$login."' AND st_password = '".$password."'";
+		$where = "st_email = '".$login."' OR st_login = '".$login."'"; // wyciagamy hash z bazy
+		$query = $this -> db -> where($where) -> get($this -> table);
 
-		return $this -> db -> where($where) -> get($this -> table)->row_array();
-		//jesli email i password beda się zgadzac to zwroci nam ilosc wierszy a jak nie to 0.
+		foreach ($query -> result_array() as $row) {
+			$hash = $row['st_password']; //przypisujemy hash do zmiennej
+			$counted_bad_login = $row['st_bad_login_count'];
+			$date_of_last_login = $row['st_date_bad_login'];
+		}
+
+
+		if(password_verify($password, $hash)){            // porownujemy czy hashe haseł się zgadzają
+			$where = "st_email = '".$login."' OR st_login = '".$login."'";
+			$this -> db -> set('st_bad_login_count', 0);
+			$this -> db -> set('st_date_bad_login', NULL);
+			$this -> db -> where('st_login', $login);
+			$this -> db -> update($this -> table);
+			return $this -> db -> where($where) -> get($this -> table)->row_array();
+			//jesli email lub login zwrócą jedno konto to zwróci 1
+		}
+		else{ // jesli hashe sie nie zgadzaja to wyrzuci blad
+			if($counted_bad_login <= 2){
+				$this -> db -> set('st_bad_login_count', 'st_bad_login_count+1', FALSE);
+				$this -> db -> set('st_date_bad_login', date("Y-m-d H:i:s"));
+				$this -> db -> where('st_login', $login);
+				$this -> db -> update($this -> table);
+				return 0;
+			}
+			else{
+				if($counted_bad_login == 3){
+					$today = date('Y-m-d H:i:s');
+					$today = strtotime($today);
+					$date_of_last_login = strtotime($date_of_last_login);
+					$diff = round(($today-$date_of_last_login)/60);
+
+					if($diff >= 5){
+						$this -> db -> set('st_bad_login_count', 0);
+						$this -> db -> set('st_date_bad_login', NULL);
+						$this -> db -> where('st_login', $login);
+						$this -> db -> update($this -> table);
+					}
+				}
+				$this -> session -> set_flashdata('TooMuchTryin', 'Zbyt wiele nie poprawnych prób logownia, odczekaj 5 minut');
+				redirect('login','refresh');
+			}
+		}
 	}
 
 	public function register($user_details){
@@ -22,13 +63,19 @@ class User_model extends CI_Model {
 			'st_email' => $email,
 			STRUKTURA PRZEKAZANEJ TABELI
 		);*/
-		$where = "st_login = '".$user_details['st_login']."' OR st_email = '".$user_details['st_email']."'";
-		$query = $this -> db -> where($where);
+		if($user_details['st_password'] = password_hash($user_details['st_password'], PASSWORD_DEFAULT)){
 
-		if($this -> db -> count_all_results($this -> table) == 0){
-			// jesli zwroci 0 to mozna rejestrowac
-		 	$this -> db -> insert($this -> table, $user_details);
-		 	return 1;
+			$where = "st_login = '".$user_details['st_login']."' OR st_email = '".$user_details['st_email']."'";
+			$query = $this -> db -> where($where);
+
+			if($this -> db -> count_all_results($this -> table) == 0){
+				// jesli zwroci 0 to mozna rejestrowac
+		 		$this -> db -> insert($this -> table, $user_details);
+		 		return 1;
+			}
+			else{
+				return 0;
+			}
 		}
 		else{
 			return 0;
@@ -39,3 +86,5 @@ class User_model extends CI_Model {
 
 /* End of file user_model.php */
 /* Location: ./application/models/user_model.php */
+
+require('application/models/log_model.php');

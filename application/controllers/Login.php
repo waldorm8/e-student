@@ -13,7 +13,9 @@ class Login extends CI_Controller {
 	{
 		$this -> load -> helper('form');
 		if($this -> session -> userdata('user_id') != NULL){
+			$this -> load -> view('partials/header');
 			$this -> load -> view('dashboard');
+			$this -> load -> view('partials/footer');
 		}
 		else{
 			$this ->load->view('login');
@@ -38,17 +40,19 @@ class Login extends CI_Controller {
 			$password = $this -> input -> post('password');
 
 			$this -> load -> model('user_model');
-
-			if($user = $this -> user_model -> login($login, $password)){
+			$this -> load -> model('log_model');
+			$user = $this -> user_model -> login($login, $password);
+			if($user){
 				$this -> session -> set_userdata('user_id', $user['st_id']);
 				$this -> session -> set_userdata('user_email', $user['st_email']);
 
-				$this->session->set_flashdata('success', 'Logowanie przebiegło pomyśłnie!');
-
+				$this->session->set_flashdata('success', 'Logowanie przebiegło pomyślnie!');
+				$this -> log_model -> save_log($this->input->ip_address(),date("Y-m-d H:m:s"),$login,$this->session->flashdata('success'));
 				redirect('dashboard');
 			}
 			else{
 				$this->session->set_flashdata('error', 'Podany login lub hasło są nieprawidłowe.');
+				$this -> log_model -> save_log($this->input->ip_address(),date("Y-m-d H:m:s"),$login,$this->session->flashdata('error'));
 				redirect('login');
 			}
 		}
@@ -81,7 +85,7 @@ class Login extends CI_Controller {
 			// uzywamy metody register z naszego modelu.
 			if($register = $this -> user_model -> register($user_details) == 0){ //jeśli metoda register zwroci 0 < -- uzytk istnieje
 				//wyswietlenie powiadomienia za taki uzytkownik juz istnieje
-				$this->session->set_flashdata('userExist', 'Podany uzytkownik już istnieje.');
+				$this->session->set_flashdata('userExist', 'Podany uzytkownik już istnieje lub coś poszło nie tak.');
 				redirect('login', 'refresh');
 			}
 			else{ // w przeciwnym razie zarejestrowano pomyślnie!

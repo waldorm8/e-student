@@ -43,6 +43,13 @@
                             }
                             ?>
                                 <?php
+                                if($this -> session -> flashdata('TooMuchTryin')){
+                                    echo "<div class=\"alert alert-danger\" role=\"alert\">";
+                                    echo $this->session->flashdata('TooMuchTryin');
+                                    echo "</div>";
+                                }
+                                ?>
+                                <?php
                                 if($this->session->flashdata('error')){
                                     echo "<div class=\"alert alert-danger\" role=\"alert\">";
                                     echo $this->session->flashdata('error');
