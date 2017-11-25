@@ -15,12 +15,6 @@ class Dashboard extends CI_Controller {
 			redirect('login','refresh');
 		}
 	}
-	public function user_details(){
-		$this -> session -> set_userdata('page', 'Dane studenta');
-		$this -> load -> view('partials/header');
-		$this -> load -> view('user-details');
-		$this -> load -> view('partials/footer');
-	}
 }
 
 /* End of file Dashboard.php */

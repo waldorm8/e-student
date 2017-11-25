@@ -1,7 +1,7 @@
 ci <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Log_model extends user_model{
+class Log_model extends CI_Model{
 	public function save_log($ip, $date, $login, $condition){
 		$data = array(
 			'hl_ip' => $ip,

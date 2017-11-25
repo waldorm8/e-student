@@ -46,6 +46,7 @@ class User_model extends CI_Model {
 						$this -> db -> set('st_date_bad_login', NULL);
 						$this -> db -> where('st_login', $login);
 						$this -> db -> update($this -> table);
+						redirect('login','refresh');
 					}
 				}
 				$this -> session -> set_flashdata('TooMuchTryin', 'Zbyt wiele nie poprawnych prób logownia, odczekaj 5 minut');
@@ -81,10 +82,36 @@ class User_model extends CI_Model {
 			return 0;
 		}
 	}
+	public function get_details($user_id){
+		$query = $this -> db -> where('st_id =', $user_id) -> get($this -> table);
+
+		return $result = $query -> result_array();
+	}
+
+	public function edit_details($details, $user_id){
+		$student_details = array(
+				'st_name' => $details['name'],
+				'st_surname' => $details['surname'],
+				'st_street' => $details['street'],
+				'st_zipcode' => $details['zipCode'],
+				'st_city' => $details['city'],
+				'st_house_number' => $details['houseNumber'],
+				'st_indeks' => $details['indexNumber'],
+				'st_pesel' => $details['pesel'],
+				'st_birth_date' => $details['dateOfBirth']
+			);
+		$this -> db -> where('st_id =', $user_id);
+		if($this -> db -> update($this -> table, $student_details)){
+			return TRUE;
+		}
+		else{
+			return FALSE;
+		}
+	}
 
 }
 
 /* End of file user_model.php */
 /* Location: ./application/models/user_model.php */
 
-require('application/models/log_model.php');
+//require('application/models/log_model.php');
