@@ -82,14 +82,17 @@ class User_model extends CI_Model {
 			return 0;
 		}
 	}
-	public function get_details($user_id){
+	public function get_details($user_id){ //metoda obslugujaca wyciaganie danych o studencie z bazy
 		$query = $this -> db -> where('st_id =', $user_id) -> get($this -> table);
 
 		return $result = $query -> result_array();
 	}
 
-	public function edit_details($details, $user_id){
-		$student_details = array(
+	public function edit_details($details, $user_id){ // metoda obslugujaca edycje danych studenta
+		$this -> db -> where('st_id =', $user_id); // zapytanie do bazy pobierajace tabela dangeo usera
+
+		if(isset($details['name'])){
+			$student_details = array( // przygotowanie tabeli z danymi do zapisania do bazy
 				'st_name' => $details['name'],
 				'st_surname' => $details['surname'],
 				'st_street' => $details['street'],
@@ -98,17 +101,28 @@ class User_model extends CI_Model {
 				'st_house_number' => $details['houseNumber'],
 				'st_indeks' => $details['indexNumber'],
 				'st_pesel' => $details['pesel'],
-				'st_birth_date' => $details['dateOfBirth']
+				'st_birth_date' => $details['dateOfBirth'],
 			);
-		$this -> db -> where('st_id =', $user_id);
-		if($this -> db -> update($this -> table, $student_details)){
-			return TRUE;
+			if($this -> db -> update($this -> table, $student_details)){ // zapisanie do bazy jesli sie powiedzie zwraca true w przeciwnym wypadku false
+				return TRUE;
+			}
+			else{
+				return FALSE;
+			}
 		}
-		else{
-			return FALSE;
+		else if(isset($details['login'])){
+			$student_acc_details = array(
+				'st_login' => $details['login'],
+				'st_email' => $details['email']
+			);
+			if($this -> db -> update($this -> table, $student_acc_details)){
+				return TRUE;
+			}
+			else{
+				return FALSE;
+			}
 		}
 	}
-
 }
 
 /* End of file user_model.php */

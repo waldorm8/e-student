@@ -11,7 +11,9 @@ if(isset($data)){
         'zipCode' => $row['st_zipcode'],
         'pesel' => $row['st_pesel'],
         'indexNumber' => $row['st_indeks'],
-        'dateOfBirth' => $row['st_birth_date']
+        'dateOfBirth' => $row['st_birth_date'],
+        'login' => $row['st_login'],
+        'email' => $row['st_email']
     );
   }
 }
@@ -81,7 +83,7 @@ if(isset($data)){
                    ?></label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                  <input class="mdl-textfield__input" type="number" id="zipCode" name="zipCode">
+                  <input class="mdl-textfield__input" maxlength="5" type="number" id="zipCode" name="zipCode">
                   <label class="mdl-textfield__label" for="zipCode">
                     <?php
                       if(isset($details)){
@@ -115,7 +117,7 @@ if(isset($data)){
                   ?></label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                  <input class="mdl-textfield__input" type="number" id="pesel" name="pesel">
+                  <input class="mdl-textfield__input" maxlength="11" type="number" id="pesel" name="pesel">
                   <label class="mdl-textfield__label" for="pesel">
                     <?php
                       if(isset($details)){
@@ -148,27 +150,27 @@ if(isset($data)){
                    ?></label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                  <label for="dateOfBirth"><?php
+                  <label for="dateOfBirth">Data urodzenia</label>
+                  <input class="mdl-datepicker__input" type="date" id="dateOfBirth" name="dateOfBirth"  value="
+                  <?php
                     if(isset($details)){
-                        if($details['dateOfBirth'] == NULL){
-                         echo "Data urodzenia";
-                       }
-                        else{
-                          echo $details['dateOfBirth'];
-                        }
+                      if($details['dateOfBirth'] != NULL){
+                        echo $details['dateOfBirth'];
                       }
                       else{
-                        echo "Data urodzenia";
+                        echo "0000-00-00";
                       }
-                  ?></label>
-                  <input class="mdl-datepicker__input" type="date" id="dateOfBirth" name="dateOfBirth" />
+                    }
+                    else{
+                      echo "0000-00-00";
+                    }
+                  ?>"/>
                 </div>
-                <button type="submit" name="save_details" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                <button type="submit" name="save_details" value="save_details" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
                     Zapisz
                 </button>
-                <?php if(validation_errors()){
-                          echo '<div class="alert alert-danger role="alert">'.validation_errors().'</div>';
-                      }
+                <?php 
+                      if(isset($form1_errors)) echo '<div class="alert alert-danger role="alert">'.$form1_errors.'</div>';
                       else if($this -> session -> flashdata('success')){
                           echo "<div class=\"alert alert-success\" role=\"alert\">";
                           echo $this->session->flashdata('success');
@@ -188,19 +190,60 @@ if(isset($data)){
             <h2 class="mdl-card__title-text">Szczegóły konta studenta</h2>
           </div>
           <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
-              <form>
+              <?php echo form_open('user_details/editing_acc_details'); ?>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                  <input class="mdl-textfield__input" type="text" id="sample3">
-                  <label class="mdl-textfield__label" for="sample3">Login</label>
+                  <input class="mdl-textfield__input" type="text" name="login" id="login">
+                  <label class="mdl-textfield__label" for="login">
+                    <?php
+                      if(isset($details)){
+                        if($details['login'] == NULL){
+                         echo "Login";
+                       }
+                        else{
+                          echo $details['login'];
+                        }
+                      }
+                      else{
+                        echo "Login";
+                      }
+                    ?>
+                  </label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                  <input class="mdl-textfield__input" type="text" id="sample3">
-                  <label class="mdl-textfield__label" for="sample3">E-mail</label>
+                  <input class="mdl-textfield__input" type="email" name="email" id="email">
+                  <label class="mdl-textfield__label" for="email">
+                    <?php
+                      if(isset($details)){
+                        if($details['email'] == NULL){
+                         echo "E-mail";
+                       }
+                        else{
+                          echo $details['email'];
+                        }
+                      }
+                      else{
+                        echo "E-mail";
+                      }
+                    ?>
+                  </label>
                 </div>
-                <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                <button type="submit" name="save_acc_details" value="save_acc_details" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
                     Zapisz
                 </button>
-              </form>
+                <?php
+                  if(isset($form2_errors)) echo '<div class="alert alert-danger role="alert">'.$form2_errors.'</div>';
+                  else if($this -> session -> flashdata('success_acc_details')){
+                    echo "<div class=\"alert alert-success\" role=\"alert\">";
+                    echo $this->session->flashdata('success_acc_details');
+                    echo "</div>";
+                  }
+                  else if($this -> session -> flashdata('error_acc_details')){
+                    echo "<div class=\"alert alert-danger\" role=\"alert\">";
+                    echo $this->session->flashdata('error_acc_details');
+                    echo "</div>";
+                  }
+                ?>
+              <?php echo form_close(); ?>
               <form>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                   <input class="mdl-textfield__input" type="text" id="sample3">
