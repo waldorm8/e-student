@@ -244,23 +244,41 @@ if(isset($data)){
                   }
                 ?>
               <?php echo form_close(); ?>
-              <form>
+              <?php echo form_open('user_details/change_password'); ?>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                  <input class="mdl-textfield__input" type="text" id="sample3">
-                  <label class="mdl-textfield__label" for="sample3">Stare hasło</label>
+                  <input class="mdl-textfield__input" type="text" id="old_password" name="old_password">
+                  <label class="mdl-textfield__label" for="old_password">Stare hasło</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                  <input class="mdl-textfield__input" type="text" id="sample3">
-                  <label class="mdl-textfield__label" for="sample3">Nowe hasło</label>
+                  <input class="mdl-textfield__input" type="text" id="new_password" name="new_password">
+                  <label class="mdl-textfield__label" for="new_password">Nowe hasło</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                  <input class="mdl-textfield__input" type="text" id="sample3">
-                  <label class="mdl-textfield__label" for="sample3">Powtórz nowe hasło</label>
+                  <input class="mdl-textfield__input" type="text" id="rp_new_password" name="rp_new_password">
+                  <label class="mdl-textfield__label" for="rp_new_password">Powtórz nowe hasło</label>
                 </div>
-                <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                <button type="submit" name="change_password" value="change_password" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
                     Zmień
                 </button>
-              </form>
+                <?php
+                  if(isset($form3_errors)) echo '<div class="alert alert-danger role="alert">'.$form3_errors.'</div>';
+                  else if($this -> session -> flashdata('success_change_password')){
+                    echo "<div class=\"alert alert-success\" role=\"alert\">";
+                    echo $this->session->flashdata('success_change_password');
+                    echo "</div>";
+                  }
+                  else if($this -> session -> flashdata('error_change_password')){
+                    echo "<div class=\"alert alert-danger\" role=\"alert\">";
+                    echo $this->session->flashdata('error_change_password');
+                    echo "</div>";
+                  }
+                  else if($this -> session -> flashdata('error_rep_password')){
+                    echo "<div class=\"alert alert-danger\" role=\"alert\">";
+                    echo $this->session->flashdata('error_rep_password');
+                    echo "</div>";
+                  }
+                ?>
+              <?php echo form_close(); ?>
           </div>
         </div>
          <div class="mdl-grid demo-content">
@@ -268,15 +286,18 @@ if(isset($data)){
             <h2 class="mdl-card__title-text">Zdjęcie</h2>
           </div>
           <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
-              <form>
+            <?php echo form_open_multipart('user_details/do_upload'); ?>
                 <div class="mdl-file mdl-js-file mdl-file--floating-label">
                   <input type="file" name="avatar" id="avatar">
                   <label class="mdl-file__label" for="avatar">Avatar</label>
                 </div>
-                <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                <button type="submit" name="avatar_upload" id="avatar_upload" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
                     Dodaj
                 </button>
-              </form>
+                <?php echo form_close(); ?>
+                <?php if(isset($error)){
+                  echo $error;
+                } ?>
           </div>
         </div>
       </main>

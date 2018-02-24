@@ -123,6 +123,33 @@ class User_model extends CI_Model {
 			}
 		}
 	}
+
+	public function change_password($user_id, $old_password, $new_password){
+		$query = $this -> db -> where('st_id =', $user_id) -> get($this->table);
+		foreach($query -> result_array() as $row){
+			$password = $row['st_password'];
+		}
+		
+		if(password_verify($old_password, $password)){
+			$hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+			$data = array(
+				'st_password' => $hashed_password
+			);
+			$this -> db -> update($this -> table, $data, "st_id =".$user_id."");
+			return TRUE;
+		}
+		else{
+			return FALSE;
+		}
+	}
+	public function add_photo($user_id, $path){
+
+		$data = array(
+			'st_photo' => $path
+		);
+
+		$this -> db -> update($this -> table, $data, "st_id=".$user_id)
+;	}
 }
 
 /* End of file user_model.php */

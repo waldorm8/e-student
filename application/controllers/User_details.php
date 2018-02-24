@@ -155,6 +155,106 @@ class User_details extends CI_Controller {
 			}
 		}
 	}
+
+	public function change_password(){
+		$this -> load -> library('form_validation');
+
+		$config = array(
+					array(
+						'field' => 'old_password',
+						'label' => 'Stare hasło',
+						'rules' => 'trim|required'
+					),
+					array(
+						'field' => 'new_password',
+						'label' => 'Nowe hasło',
+						'rules' => 'trim|required'
+					),
+					array(
+						'field' => 'rp_new_password',
+						'label' => 'Powtórzone nowe hasło',
+						'rules' => 'trim|required'
+					)
+		);
+
+		$this -> form_validation -> set_rules($config);
+		$this -> form_validation -> set_message('required', "Pole {field} jest wymagane!");
+
+		$user_id = $this -> session -> userdata('user_id');
+
+		if($this -> input -> post('change_password') == "change_password"){
+			if($this -> form_validation -> run() == FALSE){
+				$this -> load -> helper('form');
+				$data['form3_errors'] = validation_errors();
+				$this -> load -> view('partials/header');
+				$this -> load -> view('user-details', $data);
+				$this -> load -> view('partials/footer');
+			}
+			else{
+				$old_password = $this -> input -> post('old_password');
+				$new_password = $this -> input -> post('new_password');
+				$rep_new_password = $this -> input -> post('rp_new_password');
+
+				if($new_password == $rep_new_password){
+					$this -> load -> model('user_model');
+					if($this -> user_model -> change_password($user_id, $old_password, $new_password)){
+						$this -> session -> set_flashdata('success_change_password', "Dziękujemy za zmiane hasła.");
+						redirect('user_details', 'refresh');
+					}
+					else{
+						$this -> session -> set_flashdata('error_change_password', "Nie zmieniono hasła!");
+						redirect('user_details','refresh');
+					}
+				}
+				else{
+					$this -> session -> set_flashdata('error_rep_password', "Hasła nie są takie same");
+					redirect('user_details', 'refresh');
+				}
+			}
+		}
+	}
+
+	public function do_upload(){
+
+		$upload_path="upload/avatars";
+		$user_id = $this -> session -> userdata('user_id');
+		$upPath = $upload_path."/".$user_id."/";
+		if(!file_exists($upPath)){
+			mkdir($upPath, 0777, true);
+		}
+		$config = array(
+			'upload_path' => $upPath,
+			'allowed_types' => 'jpg|jpeg',
+			'max_size' => '0',
+			'encrypt_name' => TRUE
+			/*'max_width' => '300'
+			'max_height' => '375'*/
+		);
+
+		$this -> load -> library('upload', $config);
+		$this -> load -> helper('form');
+
+		if(! $this -> upload -> do_upload('avatar')){
+			$error = array(
+				'error' => $this -> upload -> display_errors()
+			);
+			$this -> load -> view('partials/header');
+			$this -> load -> view('user-details', $error);
+			$this -> load -> view('partials/footer');
+		}
+		else{
+			$data = array(
+				'upload_data' => $this -> upload -> data(),
+				'photo_path' => "http://localhost/e-student/".$photo_path
+			);
+			$photo_path = $upPath.$this->upload->data('file_name');
+			$this -> load -> model('user_model');
+			$this -> user_model -> add_photo($user_id, $photo_path);
+			$this -> load -> view('partials/header', $data);
+			$this -> load -> view('user-details', $data);
+			$this -> load -> view('partials/footer');
+		}
+	}
 }
 
 /* End of file User_details.php */
