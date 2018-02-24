@@ -68,14 +68,14 @@ class User_details extends CI_Controller {
 					'field' => 'dateOfBirth',
 					'label' => 'Data urodzenia',
 					'rules' => 'trim|required'
-				)	
+				)
 		);
 		/////////////////////////////////////////
 		$this -> form_validation -> set_rules($config); // ustawienie zasad walidacji
 		$this -> form_validation -> set_message('required', 'Pole {field} jest wymagane!'); // ustawienie komunikatu w razie walidacji
 		////////////////////////////////////////////////
 		$user_id = $this -> session -> userdata('user_id'); // id usera z sesji
-		
+
 		if($this->input->post('save_details') == "save_details"){ // sprawdzenie czy formularz został wysłany
 			if($this -> form_validation -> run() == FALSE){ // sprawdzenie czy formularz został wykonany czy nie
 				$this -> load -> helper('form');
@@ -216,16 +216,16 @@ class User_details extends CI_Controller {
 
 	public function do_upload(){
 
-		$upload_path="upload/avatars";
-		$user_id = $this -> session -> userdata('user_id');
-		$upPath = $upload_path."/".$user_id."/";
-		if(!file_exists($upPath)){
+		$upload_path="upload/avatars";//sciezka uploadu
+		$user_id = $this -> session -> userdata('user_id'); // pobranie user id z sesji
+		$upPath = $upload_path."/".$user_id."/"; //dodanie do sciezki nazwy folderu user id
+		if(!file_exists($upPath)){ // w przypadku gdyby folder taki nie istnial to go tworzymy i nadajemy odpowiednie prawa
 			mkdir($upPath, 0777, true);
 		}
-		$config = array(
+		$config = array( // config do uploadu
 			'upload_path' => $upPath,
 			'allowed_types' => 'jpg|jpeg',
-			'max_size' => '0',
+			'max_size' => '0', // maxymalny rozmiar zdjecia, 0 - no limit, [kb]
 			'encrypt_name' => TRUE
 			/*'max_width' => '300'
 			'max_height' => '375'*/
@@ -243,11 +243,11 @@ class User_details extends CI_Controller {
 			$this -> load -> view('partials/footer');
 		}
 		else{
+			$photo_path = $upPath.$this->upload->data('file_name');
 			$data = array(
 				'upload_data' => $this -> upload -> data(),
 				'photo_path' => "http://localhost/e-student/".$photo_path
 			);
-			$photo_path = $upPath.$this->upload->data('file_name');
 			$this -> load -> model('user_model');
 			$this -> user_model -> add_photo($user_id, $photo_path);
 			$this -> load -> view('partials/header', $data);
