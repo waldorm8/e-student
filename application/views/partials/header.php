@@ -88,7 +88,11 @@
       </header>
       <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
         <header class="demo-drawer-header">
-          <img src="<?php echo base_url(); ?>assets/images/user.jpg" class="demo-avatar">
+          <?php if(!isset($this->session->avatar)): ?>
+            <img src="<?php echo base_url(); ?>assets/images/user.jpg" class="demo-avatar">
+          <?php else: ?>
+            <img src="<?php echo base_url().$this->session->avatar; ?>" class="demo-avatar">
+        <?php endif ?>
           <div class="demo-avatar-dropdown">
             <span><?php echo $this -> session -> user_email; ?></span>
             <div class="mdl-layout-spacer"></div>
