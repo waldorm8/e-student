@@ -6,9 +6,11 @@ class Dashboard extends CI_Controller {
 	public function index()
 	{
 		if($this -> session -> userdata('user_id') != NULL){
+			$user_id = $this -> session -> userdata('user_id');
 			$this -> session -> set_userdata('page', 'Strona główna');
 			$this -> load -> model('user_model');
-			$user_id = $this -> session -> userdata('user_id');
+			$this -> load -> model('Article_model');
+			$articles['articles'] = $this -> Article_model -> get_article('all');
 			$details = $this -> user_model -> get_details($user_id);
 			$avatar = '';
 			foreach($details as $row){
@@ -17,7 +19,7 @@ class Dashboard extends CI_Controller {
 
 			$this -> session -> set_userdata('avatar', $avatar);
 			$this -> load -> view('partials/header');
-			$this -> load -> view('dashboard');
+			$this -> load -> view('dashboard', $articles);
 			$this -> load -> view('partials/footer');
 		}
 		else{

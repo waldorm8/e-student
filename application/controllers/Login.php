@@ -47,12 +47,19 @@ class Login extends CI_Controller {
 				$this -> session -> set_userdata('user_email', $user['st_email']);
 
 				$this->session->set_flashdata('success', 'Logowanie przebiegło pomyślnie!');
-				$this -> log_model -> save_log($this->input->ip_address(),date("Y-m-d H:m:s"),$login,$this->session->flashdata('success'));
-				redirect('dashboard');
+				//$this -> log_model -> save_log($this->input->ip_address(),date("Y-m-d H:m:s"),$login,$this->session->flashdata('success'));
+
+				if($user['st_role'] != 'a'){
+					redirect('dashboard');
+				}
+				else{
+					$this -> session -> set_userdata('role', 'admin');
+					redirect('admin');
+				}
 			}
 			else{
 				$this->session->set_flashdata('error', 'Podany login lub hasło są nieprawidłowe.');
-				$this -> log_model -> save_log($this->input->ip_address(),date("Y-m-d H:m:s"),$login,$this->session->flashdata('error'));
+				//$this -> log_model -> save_log($this->input->ip_address(),date("Y-m-d H:m:s"),$login,$this->session->flashdata('error'));
 				redirect('login');
 			}
 		}
@@ -100,7 +107,7 @@ class Login extends CI_Controller {
 		$this -> session -> sess_destroy();
 		redirect('login');
 	}
-    
+
 }
 
 /* End of file index.php */

@@ -31,6 +31,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+    <script src="//cdn.ckeditor.com/4.8.0/basic/ckeditor.js"></script>
     <link rel="apple-touch-icon-precomposed" href="<?php echo base_url(); ?>assets/images/ios-desktop.png">
 
     <!-- Tile icon for Win8 (144x144 + tile color) -->
