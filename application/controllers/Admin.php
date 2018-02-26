@@ -20,7 +20,12 @@ class Admin extends CI_Controller{
       $this -> load -> view('partials/admin_footer');
     }
     else{
-      redirect('login', 'refresh');
+      if($this -> session -> userdata('user_id') != NULL){
+        redirect('dashboard', 'refresh');
+      }
+      else{
+        redirect('login', 'refresh');
+      }
     }
   }
 

@@ -13,9 +13,7 @@ class Login extends CI_Controller {
 	{
 		$this -> load -> helper('form');
 		if($this -> session -> userdata('user_id') != NULL){
-			$this -> load -> view('partials/header');
-			$this -> load -> view('dashboard');
-			$this -> load -> view('partials/footer');
+			redirect('dashboard', 'redirect');
 		}
 		else{
 			$this ->load->view('login');
