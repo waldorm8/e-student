@@ -12,19 +12,19 @@
         </nav>
       </div>
       <main class="mdl-layout__content mdl-color--grey-100">
-        <div class="mdl-grid demo-content">
-          <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid content">
             <?php
               foreach($articles as $row){?>
+                <div class="mdl-grid demo-content">
+                  <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid content">
                   <h2 class="mdl-card__title-text title"><?php echo $row['n_title']; ?></h2>
                   <small class="date"><?php echo $row['n_date']; ?></small>
                   <div class="mdl-card__supporting-text text">
                       <?php echo $row['n_text']; ?>
                   </div>
+                </div>
+              </div>
                 <?php
                   }
                 ?>
-          </div>
-        </div>
       </main>
     </div>

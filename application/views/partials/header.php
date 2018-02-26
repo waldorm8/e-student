@@ -62,6 +62,7 @@
       z-index: 900;
     }
     </style>
+    <script src="<?php echo base_url(); ?>assets/js/vendor/jquery-3.2.1.min.js"></script>
   </head>
   <body>
     <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">

@@ -22,4 +22,35 @@ class Article_model extends CI_Model{
 
   }
 
+  public function delete_article($id){
+    $this->db->where('n_id', $id);
+    $query = $this->db->delete('news');
+
+    if($query){
+      return TRUE;
+    }
+    else{
+      return FALSE;
+    }
+  }
+  public function edit_article($id){
+    $now = date("Y-m-d H:m:s");
+
+    $title = $this -> input -> post('title');
+    $text = $this -> input -> post('text');
+
+    $data = array(
+      'n_title' => $title,
+      'n_text' => $text,
+      'n_date' => $now
+    );
+    $this->db->where('n_id', $id);
+    if($this->db->update('news', $data) == TRUE){
+      return TRUE;
+    }
+    else{
+      return FALSE;
+    }
+  }
+
 }

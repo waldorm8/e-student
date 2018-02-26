@@ -61,4 +61,52 @@ class Admin extends CI_Controller{
 
   }
 
+  public function delete_news(){
+    $id = $this -> input -> get('id', TRUE);
+    $this -> load -> model('Article_model');
+    if($this -> Article_model -> delete_article($id) == TRUE){
+      redirect('admin');
+    }
+    else{
+      echo "Coś poszło nie tak z zapytaniem usuwającym";
+    }
+  }
+  public function edit_news(){
+
+    if($this -> session -> userdata('user_id') != NULL && $this -> session -> userdata('role') == 'admin'){
+      $id = $this -> input -> get('id', TRUE);
+      $this -> load -> model('Article_model');
+      $articles['articles'] = $this -> Article_model -> get_article($id);
+      $this -> load -> library('form_validation');
+      $this -> form_validation -> set_rules('title', 'Tytuł', 'required');
+      $this -> form_validation -> set_rules('text', 'Tekst', 'required');
+      if($this -> form_validation -> run() == FALSE){
+        $this -> load -> helper('form');
+        $this -> load -> view('partials/admin_header');
+        $this -> load -> view('add_news', $articles);
+        $this -> load -> view('partials/admin_footer');
+      }
+      else{
+        if($this -> Article_model -> edit_article($id) == TRUE){
+          $this -> session -> set_flashdata('edit_done', 'Poprawnie zeedytowano tekst.');
+          redirect('admin/edit_news?id='.$id);
+        }
+        else{
+          $this -> session -> set_flashdata('edit_bad', 'Wystąpił błąd podczas edycji');
+          redirect('admin/edit_news?id='.$id);
+        }
+
+
+      }
+      /*if($this -> Article_model -> edit_article($id) == TRUE){
+          $this -> session -> set_flashdata('edit_done', 'Zeedytowano poprawnie wpis!');
+          redirect('admin/edit_news?id='.$id);
+      }
+      else{
+        $this -> session -> set_flashdata('edit_bad', 'Wystąpił błąd podczas edycji!');
+        redirect('admin/edit_news?id='.$id);
+      }*/
+    }
+  }
+
 }

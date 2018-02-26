@@ -14,13 +14,37 @@
 <div class="mdl-grid demo-content">
   <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid content">
       <div class="mdl-card__supporting-text text">
-        <?php echo form_open('admin/add_news'); ?>
+        <?php
+        if($this -> input -> get('id', TRUE)){
+            echo form_open('admin/edit_news?id='.$this -> input -> get('id', TRUE));
+        }
+        else{
+            echo form_open('admin/add_news');
+        }?>
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" name="title" id="title">
+            <input class="mdl-textfield__input" type="text" name="title" id="title" value="<?php
+            if($this -> input -> get('id', TRUE)){
+              foreach($articles as $row){
+                  echo $row['n_title'];
+              }
+            }
+            else{
+              echo "";
+            }
+            ?>">
             <label class="mdl-textfield__label" for="title">Tytuł</label>
           </div>
           <textarea name="text" id="editor1" rows="10" cols="80">
-              This is my textarea to be replaced with CKEditor.
+          <?php
+          if($this -> input -> get('id', TRUE)){
+            foreach($articles as $row){
+              echo $row['n_text'];
+            }
+          }
+          else{
+            echo "";
+            }
+          ?>
           </textarea>
           <script>
               // Replace the <textarea id="editor1"> with a CKEditor
@@ -37,23 +61,24 @@
             echo $this->session->flashdata('Done');
             echo "</div>";
           }
-          else{
+          elseif($this->session->flashdata('Bad')){
             echo "<div class=\"alert alert-warnings\" role=\"alert\">";
             echo $this->session->flashdata('Bad');
+            echo "</div>";
+          }
+          elseif($this -> session -> flashdata('edit_done')){
+            echo "<div class=\"alert alert-success\" role=\"alert\">";
+            echo $this->session->flashdata('edit_done');
+            echo "</div>";
+          }
+          elseif($this->session->flashdata('edit_bad')){
+            echo "<div class=\"alert alert-warnings\" role=\"alert\">";
+            echo $this->session->flashdata('edit_bad');
             echo "</div>";
           }
       ?>
       </div>
   </div>
-
-  <!--<div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
-    <svg fill="currentColor" viewBox="0 0 500 250" class="demo-graph">
-      <use xlink:href="#chart" />
-    </svg>
-    <svg fill="currentColor" viewBox="0 0 500 250" class="demo-graph">
-      <use xlink:href="#chart" />
-    </svg>
-  </div>-->
 </div>
 </main>
 </div>

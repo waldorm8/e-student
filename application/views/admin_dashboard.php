@@ -12,28 +12,24 @@
         </nav>
       </div>
       <main class="mdl-layout__content mdl-color--grey-100">
-        <div class="mdl-grid demo-content">
-          <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid content">
+
             <?php
               foreach($articles as $row){?>
-                  <h2 class="mdl-card__title-text title"><?php echo $row['n_title']; ?></h2>
+                <div class="mdl-grid demo-content">
+                  <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid content">
+                  <h2 class="mdl-card__title-text title">
+                    <?php echo $row['n_title']; ?>
+                    <a href="<?php echo base_url(); ?>admin/delete_news?id=<?php echo $row['n_id'] ?>"><i class="material-icons">clear</i></a>
+                    <a href="<?php echo base_url(); ?>admin/edit_news?id=<?php echo $row['n_id'] ?>"><i class="material-icons edit">create</i></a>
+                  </h2>
                   <small class="date"><?php echo $row['n_date']; ?></small>
                   <div class="mdl-card__supporting-text text">
                       <?php echo $row['n_text']; ?>
                   </div>
+                  </div>
+                  </div>
                 <?php
                   }
                 ?>
-          </div>
-
-          <!--<div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
-            <svg fill="currentColor" viewBox="0 0 500 250" class="demo-graph">
-              <use xlink:href="#chart" />
-            </svg>
-            <svg fill="currentColor" viewBox="0 0 500 250" class="demo-graph">
-              <use xlink:href="#chart" />
-            </svg>
-          </div>-->
-        </div>
       </main>
     </div>
