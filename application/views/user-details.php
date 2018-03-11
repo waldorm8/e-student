@@ -22,7 +22,7 @@ if(isset($data)){
  <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
           <a class="mdl-navigation__link" href="<?php echo site_url('dashboard'); ?>"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Strona główna</a>
           <a style="background-color:rgb(64,196,255);" class="mdl-navigation__link" href="<?php echo site_url('user_details'); ?>"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">assignment_ind</i>Dane studenta</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">stars</i>Rekrutacja</a>
+          <a class="mdl-navigation__link" href="<?php echo site_url('recruitment') ?>"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">stars</i>Rekrutacja</a>
           <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">forum</i>Wiadomosci</a>
           <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">school</i>Kierunki studiów</a>
           <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">domain</i>Akademiki</a>
@@ -40,12 +40,12 @@ if(isset($data)){
               <?php echo form_open('user_details/editing_details'); ?>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                   <input class="mdl-textfield__input" type="text" id="name" name="name">
-                  <label class="mdl-textfield__label" for="name"><?php $text = isset($details['name']) ? $details['name'] : 
+                  <label class="mdl-textfield__label" for="name"><?php $text = isset($details['name']) ? $details['name'] :
                   "Imię"; echo $text; ?></label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                   <input class="mdl-textfield__input" type="text" id="surname" name="surname">
-                  <label class="mdl-textfield__label" for="surname"><?php $text = isset($details['surname']) ? $details['surname'] : 
+                  <label class="mdl-textfield__label" for="surname"><?php $text = isset($details['surname']) ? $details['surname'] :
                   "Nazwisko"; echo $text;  ?></label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -68,7 +68,7 @@ if(isset($data)){
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                   <input class="mdl-textfield__input" type="number" id="houseNumber" name="houseNumber">
                   <label class="mdl-textfield__label" for="houseNumber">
-                    <?php 
+                    <?php
                       if(isset($details)){
                         if($details['houseNumber'] == NULL){
                           echo "Numer domu/mieszkania";
@@ -102,7 +102,7 @@ if(isset($data)){
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                   <input class="mdl-textfield__input" type="text" id="city" name="city">
                   <label class="mdl-textfield__label" for="city">
-                    <?php 
+                    <?php
                       if(isset($details)){
                         if($details['city'] == NULL){
                          echo "Miasto";
@@ -135,7 +135,7 @@ if(isset($data)){
                 </div>
                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                   <input class="mdl-textfield__input" type="number" id="indexNumber" name="indexNumber">
-                  <label class="mdl-textfield__label" for="indexNumber"><?php 
+                  <label class="mdl-textfield__label" for="indexNumber"><?php
                     if(isset($details)){
                         if($details['indexNumber'] == NULL){
                          echo "Numer indeksu";
@@ -169,7 +169,7 @@ if(isset($data)){
                 <button type="submit" name="save_details" value="save_details" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
                     Zapisz
                 </button>
-                <?php 
+                <?php
                       if(isset($form1_errors)) echo '<div class="alert alert-danger role="alert">'.$form1_errors.'</div>';
                       else if($this -> session -> flashdata('success')){
                           echo "<div class=\"alert alert-success\" role=\"alert\">";
@@ -301,4 +301,4 @@ if(isset($data)){
           </div>
         </div>
       </main>
-    </div> 
+    </div>
