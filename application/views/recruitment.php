@@ -20,210 +20,202 @@
                 <option></option>
                 <?php foreach($ways as $result)
                 { ?>
-                <option value="<?php echo strtolower($result['sw_name']) ?>"><?php echo $result['sw_name']?></option>
+                <option value="<?php echo strtolower($result['sw_id']) ?>"><?php echo $result['sw_name']?></option>
                 <?php
                 }
                 ?>
               </select>
+              <?php
+              if($this->session->flashdata('good')):?>
+                <div class="alert alert-success" role="alert">
+                  <?php  echo $this -> session -> flashdata('good'); ?>
+                </div>
+              <?php
+              elseif($this -> session -> flashdata('bad')):?>
+                <div class="alert alert-warning" role="alert">
+                  <?php echo $this -> session -> flashdata('bad');
+              endif;
+               ?>
               <h4>Nie jesteś pewny jaki kierunek wybrać? <a href="<?php echo site_url('catalog') ?>">Zobacz katalog kierunków.</a></h4>
             </div>
 
-            <form>
+            <?php echo form_open('recruitment/save_conclusion'); ?>
             <div style="display:none;" class="form-group informatyka">
               <h3>Informatyka (inżynier)</h3>
-              <input style="display:none" type="text" name="way" value="Informatyka">
+              <input style="display:none" type="text" name="way" value="4">
               <h4>Wpisz oceny ze świadectwa maturalnego</h4>
-              <label for="">Ocena z matematyki</label>
-              <input type="number" maxlength="1" min="2" max="6" class="form-control" id="">
-              <label for="">Ocena z informatyki</label>
-              <input type="number" maxlength="1" min="2" max="6" class="form-control" id="">
               <label for="">Ocena z języka polskiego</label>
-              <input type="number" maxlength="1" min="2" max="6" class="form-control" id="">
+              <input required type="text" placeholder="zakres: 2-6" pattern="[2-6]{1}" name="polish_degree" class="form-control">
+              <label for="">Ocena z matematyki</label>
+              <input required type="text" placeholder="zakres: 2-6" pattern="[2-6]{1}" name="math_degree" class="form-control">
               <label for="">Ocena z języka angielskiego</label>
-              <input type="number" maxlength="1" min="2" max="6" class="form-control" id="">
-              <label id="label" for="study_way">Oceny z zachowania</label>
-              <select name="" class="form-control" id="">
+              <input required type="text" placeholder="zakres: 2-6" pattern="[2-6]{1}" name="english_degree" class="form-control">
+              <label for="">Ocena z informatyki lub fizyki</label>
+              <input required type="text" placeholder="zakres: 2-6" pattern="[2-6]{1}" name="add_degree" class="form-control">
+              <label id="label" for="study_way">Ocena z zachowania</label>
+              <select required name="behavior_degree" class="form-control">
                 <option></option>
-                <option value="informatyka">Wzorowy</option>
-                <option value="matematykaq">Bardzo dobry</option>
-                <option value="pedagogika">Dobry</option>
-                <option value="kosmetologia">Poprawny</option>
-                <option value="filologia">Naganny</option>
+                <option value="6">Wzorowy</option>
+                <option value="5">Bardzo dobry</option>
+                <option value="4">Dobry</option>
+                <option value="3">Poprawny</option>
+                <option value="2">Naganny</option>
+                <option value="1">Nieodpowiedni</option>
               </select>
               <h4>Wpisz procentowe wyniki matury</h4>
-              <label for="">Wynik z matematyki poziom podstawowym</label>
-              <input type="number" maxlength="3" class="form-control" id="">
-              <label for="">Wynik z matematyki poziom rozszerzonym</label>
-              <input type="number" maxlength="3" class="form-control" placeholder="Jeśli nie pisano wpisz 0" id="">
               <label for="">Wynik z języka polskiego</label>
-              <input type="number" maxlength="3" class="form-control" id="">
+              <input required type="number" min="30" max="100" placeholder="zakres: 30-100" name="polish_score" class="form-control" id="">
+              <label for="">Wynik z matematyki poziom podstawowy</label>
+              <input required type="number" min="30" max="100" placeholder="zakres: 30-100" name="math_score" class="form-control" id="">
               <label for="">Wynik z języka angielskiego</label>
-              <input type="number" maxlength="1" min="2" max="6" class="form-control" id="">
-              <button type="button" class="btn btn-primary btn-lg btn-block">Złóż na studia!</button>
+              <input required type="number" min="30" max="100" placeholder="zakres: 30-100" name="english_score" class="form-control" id="">
+              <label for="">Wynik z przedmiotu dodatkowego (matematyka-poziom rozszerzony lub informatyka lub fizyka)</label>
+              <input required type="number" min="0" max="100" class="form-control" name="additional_score" placeholder="Jeśli nie pisano wpisz 0" id="">
+              <button type="submit" class="btn btn-primary btn-lg btn-block">Złóż na studia!</button>
             </div>
-            </form>
-            <form>
+            <?php echo form_close(); ?>
+            <?php echo form_open('recruitment/save_conclusion'); ?>
             <div style="display:none;" class="form-group matematyka">
               <h3>Matematyka (licencjat)</h3>
-              <input style="display:none" type="text" name="way" value="Matematyka">
+              <input style="display:none" type="text" name="way" value="5">
               <h4>Wpisz oceny ze świadectwa maturalnego</h4>
-              <label for="">Ocena z matematyki</label>
-              <input type="number" maxlength="1" min="2" max="6" class="form-control" id="">
-              <label for="">Ocena z WOS'u</label>
-              <input type="number" maxlength="1" min="2" max="6" class="form-control" id="">
               <label for="">Ocena z języka polskiego</label>
-              <input type="number" maxlength="1" min="2" max="6" class="form-control" id="">
+              <input required type="text" placeholder="zakres: 2-6" pattern="[2-6]{1}" class="form-control" id="">
+              <label for="">Ocena z matematyki</label>
+              <input required type="text" placeholder="zakres: 2-6" pattern="[2-6]{1}" class="form-control" id="">
               <label for="">Ocena z języka angielskiego</label>
-              <input type="number" maxlength="1" min="2" max="6" class="form-control" id="">
-              <label id="label" for="study_way">Oceny z zachowania</label>
-              <select name="" class="form-control" id="">
+              <input required type="text" placeholder="zakres: 2-6" pattern="[2-6]{1}" class="form-control" id="">
+              <label for="">Ocena z informatyki lub fizyki</label>
+              <input required type="text" placeholder="zakres: 2-6" pattern="[2-6]{1}" class="form-control" id="">
+              <label id="label" for="study_way">Ocena z zachowania</label>
+              <select required name="" class="form-control" id="">
                 <option></option>
-                <option value="informatyka">Wzorowy</option>
-                <option value="matematykaq">Bardzo dobry</option>
-                <option value="pedagogika">Dobry</option>
-                <option value="kosmetologia">Poprawny</option>
-                <option value="filologia">Naganny</option>
+                <option value="6">Wzorowy</option>
+                <option value="5">Bardzo dobry</option>
+                <option value="4">Dobry</option>
+                <option value="3">Poprawny</option>
+                <option value="2">Naganny</option>
+                <option value="1">Nieodpowiedni</option>
               </select>
               <h4>Wpisz procentowe wyniki matury</h4>
-              <label for="">Wynik z matematyki, poziom podstawowym</label>
-              <input type="number" maxlength="3" class="form-control" id="">
-              <label for="">Wynik z matematyki, poziom rozszerzonym</label>
-              <input type="number" maxlength="3" class="form-control" placeholder="Jeśli nie pisano wpisz 0" id="">
               <label for="">Wynik z języka polskiego</label>
-              <input type="number" maxlength="3" class="form-control" id="">
+              <input required type="number" min="30" max="100" placeholder="zakres: 30-100" class="form-control" id="">
+              <label for="">Wynik z matematyki poziom podstawowy</label>
+              <input required type="number" min="30" max="100" placeholder="zakres: 30-100" class="form-control" id="">
               <label for="">Wynik z języka angielskiego</label>
-              <input type="number" maxlength="1" min="2" max="6" class="form-control" id="">
-              <button type="button" class="btn btn-primary btn-lg btn-block">Złóż na studia!</button>
+              <input required type="number" min="30" max="100" placeholder="zakres: 30-100" class="form-control" id="">
+              <label for="">Wynik z przedmiotu dodatkowego (matematyka - poziom rozszerzony, informatyka, fizyka)</label>
+              <input required type="number" min="0" max="100" class="form-control" placeholder="Jeśli nie pisano wpisz 0" id="">
+              <button type="submit" class="btn btn-primary btn-lg btn-block">Złóż na studia!</button>
             </div>
-          </form>
-            <form>
+          <?php echo form_close(); ?>
+            <?php echo form_open('recruitment/save_conclusion'); ?>
             <div style="display:none;" class="form-group pedagogika">
               <h3>Pedagogika (licencjat)</h3>
-              <input style="display:none" type="text" name="way" value="Pedagogika">
+              <input style="display:none" type="text" name="way" value="11">
               <h4>Wpisz oceny ze świadectwa maturalnego</h4>
-              <label for="">Ocena z matematyki</label>
-              <input type="number" maxlength="1" min="2" max="6" class="form-control" id="">
-              <label for="">Ocena z historii</label>
-              <input type="number" maxlength="1" min="2" max="6" class="form-control" id="">
               <label for="">Ocena z języka polskiego</label>
-              <input type="number" maxlength="1" min="2" max="6" class="form-control" id="">
+              <input required type="text" placeholder="zakres: 2-6" pattern="[2-6]{1}" class="form-control" id="">
+              <label for="">Ocena z matematyki</label>
+              <input required type="text" placeholder="zakres: 2-6" pattern="[2-6]{1}" class="form-control" id="">
               <label for="">Ocena z języka angielskiego</label>
-              <input type="number" maxlength="1" min="2" max="6" class="form-control" id="">
-              <label id="label" for="study_way">Oceny z zachowania</label>
-              <select name="" class="form-control" id="">
+              <input required type="text" placeholder="zakres: 2-6" pattern="[2-6]{1}" class="form-control" id="">
+              <label for="">Ocena z historii lub WOS</label>
+              <input required type="text" placeholder="zakres: 2-6" pattern="[2-6]{1}" class="form-control" id="">
+              <label id="label" for="study_way">Ocena z zachowania</label>
+              <select required name="" class="form-control" id="">
                 <option></option>
-                <option value="informatyka">Wzorowy</option>
-                <option value="matematykaq">Bardzo dobry</option>
-                <option value="pedagogika">Dobry</option>
-                <option value="kosmetologia">Poprawny</option>
-                <option value="filologia">Naganny</option>
+                <option value="6">Wzorowy</option>
+                <option value="5">Bardzo dobry</option>
+                <option value="4">Dobry</option>
+                <option value="3">Poprawny</option>
+                <option value="2">Naganny</option>
+                <option value="1">Nieodpowiedni</option>
               </select>
               <h4>Wpisz procentowe wyniki matury</h4>
-              <label for="">Wynik z matematyki</label>
-              <input type="number" maxlength="3" class="form-control" id="">
-              <label for="">Wynik z języka polskiego, poziom podstawowy</label>
-              <input type="number" maxlength="3" class="form-control" placeholder="Jeśli nie pisano wpisz 0" id="">
-              <label for="">Wynik z języka polskiego, poziom rozszerzony</label>
-              <input type="number" maxlength="3" class="form-control" id="">
+              <label for="">Wynik z języka polskiego poziom podstawowy</label>
+              <input required type="number" min="30" max="100" placeholder="zakres: 30-100" class="form-control" id="">
+              <label for="">Wynik z matematyki poziom podstawowy</label>
+              <input required type="number" min="30" max="100" placeholder="zakres: 30-100" class="form-control" id="">
               <label for="">Wynik z języka angielskiego</label>
-              <input type="number" maxlength="1" min="2" max="6" class="form-control" id="">
-              <button type="button" class="btn btn-primary btn-lg btn-block">Złóż na studia!</button>
+              <input required type="number" min="30" max="100" placeholder="zakres: 30-100" class="form-control" id="">
+              <label for="">Wynik z przedmiotu dodatkowego (język polski - poziom rozszerzony lub historia lub wos)</label>
+              <input required type="number" min="0" max="100" class="form-control" placeholder="Jeśli nie pisano wpisz 0" id="">
+              <button type="submit" class="btn btn-primary btn-lg btn-block">Złóż na studia!</button>
             </div>
-          </form>
-            <form>
+          <?php echo form_close(); ?>
+            <?php echo form_open('recruitment/save_conclusion'); ?>
             <div style="display:none;" class="form-group kosmetologia">
               <h3>Kosmetologia (licencjat)</h3>
-              <input style="display:none" type="text" name="way" value="Kosmetologia">
+              <input style="display:none" type="text" name="way" value="10">
               <h4>Wpisz oceny ze świadectwa maturalnego</h4>
-              <label for="">Ocena z matematyki</label>
-              <input type="number" maxlength="1" min="2" max="6" class="form-control" id="">
-              <label for="">Ocena z biologii</label>
-              <input type="number" maxlength="1" min="2" max="6" class="form-control" id="">
-              <label for="">Ocena z chemii</label>
-              <input type="number" maxlength="1" min="2" max="6" class="form-control" id="">
               <label for="">Ocena z języka polskiego</label>
-              <input type="number" maxlength="1" min="2" max="6" class="form-control" id="">
+              <input required type="text" placeholder="zakres: 2-6" pattern="[2-6]{1}" class="form-control" id="">
+              <label for="">Ocena z matematyki</label>
+              <input required type="text" placeholder="zakres: 2-6" pattern="[2-6]{1}" class="form-control" id="">
               <label for="">Ocena z języka angielskiego</label>
-              <input type="number" maxlength="1" min="2" max="6" class="form-control" id="">
+              <input required type="text" placeholder="zakres: 2-6" pattern="[2-6]{1}" class="form-control" id="">
+              <label for="">Ocena z chemii lub biologii</label>
+              <input required type="text" placeholder="zakres: 2-6" pattern="[2-6]{1}" class="form-control" id="">
               <label id="label" for="study_way">Oceny z zachowania</label>
-              <select name="" class="form-control" id="">
+              <select required name="" class="form-control" id="">
                 <option></option>
-                <option value="informatyka">Wzorowy</option>
-                <option value="matematykaq">Bardzo dobry</option>
-                <option value="pedagogika">Dobry</option>
-                <option value="kosmetologia">Poprawny</option>
-                <option value="filologia">Naganny</option>
+                <option value="6">Wzorowy</option>
+                <option value="5">Bardzo dobry</option>
+                <option value="4">Dobry</option>
+                <option value="3">Poprawny</option>
+                <option value="2">Naganny</option>
+                <option value="1">Nieodpowiedni</option>
               </select>
               <h4>Wpisz procentowe wyniki matury</h4>
-              <label for="">Wynik z matematyki</label>
-              <input type="number" maxlength="3" class="form-control" id="">
               <label for="">Wynik z języka polskiego</label>
-              <input type="number" maxlength="3" class="form-control" placeholder="Jeśli nie pisano wpisz 0" id="">
-              <label for="">Wynik z chemii lub biologii</label>
-              <input type="number" maxlength="3" class="form-control" id="" placeholder="Wybierz lepszy wynik">
+              <input required type="number" min="30" max="100" placeholder="zakres: 30-100" class="form-control" id="">
+              <label for="">Wynik z matematyki poziom podstawowy</label>
+              <input required type="number" min="30" max="100" placeholder="zakres: 30-100" class="form-control" id="">
               <label for="">Wynik z języka angielskiego</label>
-              <input type="number" maxlength="1" min="2" max="6" class="form-control" id="">
-              <button type="button" class="btn btn-primary btn-lg btn-block">Złóż na studia!</button>
+              <input required type="number" min="30" max="100" placeholder="zakres: 30-100" class="form-control" id="">
+              <label for="">Wynik z przedmiotu dodatkowego (biologia, chemia)</label>
+              <input required type="number" min="0" max="100" class="form-control" placeholder="Jeśli nie pisano wpisz 0" id="">
+              <button type="submit" class="btn btn-primary btn-lg btn-block">Złóż na studia!</button>
             </div>
-          </form>
-            <form>
+          <?php echo form_close(); ?>
+            <?php echo form_open('recruitment/save_conclusion'); ?>
             <div style="display:none;" class="form-group filologia">
               <h3>Filologia (licencjat)</h3>
-              <input style="display:none" type="text" name="way" value="Filologia">
+              <input style="display:none" type="text" name="way" value="14">
               <h4>Wpisz oceny ze świadectwa maturalnego</h4>
-              <label for="">Ocena z matematyki</label>
-              <input type="number" maxlength="1" min="2" max="6" class="form-control" id="">
-              <label for="">Ocena z historii</label>
-              <input type="number" maxlength="1" min="2" max="6" class="form-control" id="">
               <label for="">Ocena z języka polskiego</label>
-              <input type="number" maxlength="1" min="2" max="6" class="form-control" id="">
+              <input required type="text" placeholder="zakres: 2-6" pattern="[2-6]{1}" class="form-control" id="">
+              <label for="">Ocena z matematyki</label>
+              <input required type="text" placeholder="zakres: 2-6" pattern="[2-6]{1}" class="form-control" id="">
               <label for="">Ocena z języka angielskiego</label>
-              <input type="number" maxlength="1" min="2" max="6" class="form-control" id="">
+              <input required type="text" placeholder="zakres: 2-6" pattern="[2-6]{1}" class="form-control" id="">
+              <label for="">Ocena z wybranego języka obcego</label>
+              <input required type="text" placeholder="zakres: 2-6" pattern="[2-6]{1}" class="form-control" id="">
               <label id="label" for="study_way">Oceny z zachowania</label>
-              <select name="" class="form-control" id="">
+              <select required name="" class="form-control" id="">
                 <option></option>
-                <option value="informatyka">Wzorowy</option>
-                <option value="matematykaq">Bardzo dobry</option>
-                <option value="pedagogika">Dobry</option>
-                <option value="kosmetologia">Poprawny</option>
-                <option value="filologia">Naganny</option>
+                <option value="6">Wzorowy</option>
+                <option value="5">Bardzo dobry</option>
+                <option value="4">Dobry</option>
+                <option value="3">Poprawny</option>
+                <option value="2">Naganny</option>
+                <option value="1">Nieodpowiedni</option>
               </select>
               <h4>Wpisz procentowe wyniki matury</h4>
-              <label for="">Wynik z matematyki</label>
-              <input type="number" maxlength="3" class="form-control" id="">
               <label for="">Wynik z języka polskiego</label>
-              <input type="number" maxlength="3" class="form-control" placeholder="Jeśli nie pisano wpisz 0" id="">
-              <label for="">Wynik z języka angielskiego, poziom podstawowy</label>
-              <input type="number" maxlength="3" class="form-control" id="">
-              <label for="">Wynik z języka angielskiego, poziom rozszerzony</label>
-              <input type="number" maxlength="1" min="2" max="6" class="form-control" id="">
-              <button type="button" class="btn btn-primary btn-lg btn-block">Złóż na studia!</button>
+              <input required type="number" min="30" max="100" placeholder="zakres: 30-100" class="form-control" id="">
+              <label for="">Wynik z matematyki poziom podstawowy</label>
+              <input required type="number" min="30" max="100" placeholder="zakres: 30-100" class="form-control" id="">
+              <label for="">Wynik z języka angielskiego</label>
+              <input required type="number" min="30" max="100" placeholder="zakres: 30-100" class="form-control" id="">
+              <label for="">Wynik z przedmiotu dodatkowego (język obcy dodatkowy lub angielski na poziomie rozszerzonym)</label>
+              <input required type="number" min="0" max="100" class="form-control" placeholder="Jeśli nie pisano wpisz 0" id="">
+              <button type="submit" class="btn btn-primary btn-lg btn-block">Złóż na studia!</button>
             </div>
-          </form>
+          <?php echo form_close(); ?>
         </div>
       </div>
 </main>
-<script>
-  $(document).ready(function(){
-      $('select').change(function(){
-        var study_way = $('select[name="listOfWays"]').val();
-        $('.study_way').hide('slow');
-        if(study_way == "informatyka"){
-          $('.informatyka').delay(800).show('slow');
-        }
-        else if(study_way == "matematyka"){
-          $('.matematyka').delay(800).show('slow');
-        }
-        else if(study_way == "pedagogika"){
-          $('.pedagogika').delay(800).show('slow');
-        }
-        else if(study_way == "kosmetologia"){
-          $('.Kosmetologia').delay(800).show('slow');
-        }
-        else if(study_way == "filologia"){
-          $('.filologia').delay(800).show('slow');
-        }
-      });
-  });
-</script>
+<script src="<?php echo base_url(); ?>assets/js/recruitment_script.js"></script>
 </div>

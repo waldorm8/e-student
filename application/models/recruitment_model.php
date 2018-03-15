@@ -23,4 +23,21 @@ class Recruitment_model extends CI_Model{
       }
     }
   }
+
+  public function save_conclusion($details){
+    if(isset($details)):
+      if($this->db->insert('recruitment_conclusion', $details)):
+        return TRUE;
+      else:
+        return FALSE;
+      endif;
+    else:
+      //can be error
+      return FALSE;
+    endif;
+  }
+
+  public function show_conslusion($which){
+
+  }
 }
