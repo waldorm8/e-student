@@ -1,4 +1,4 @@
-ci <?php
+<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Log_model extends CI_Model{
@@ -17,7 +17,7 @@ class Log_model extends CI_Model{
 		$query = $this -> db -> where($where) -> get('history_login');
 		$array_logs = array();
 		return $wynik = $query -> result_array();
-		
+
 	}
 }
 

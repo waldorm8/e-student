@@ -129,7 +129,7 @@ class User_model extends CI_Model {
 		foreach($query -> result_array() as $row){
 			$password = $row['st_password'];
 		}
-		
+
 		if(password_verify($old_password, $password)){
 			$hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
 			$data = array(

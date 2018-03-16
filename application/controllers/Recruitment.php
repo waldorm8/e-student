@@ -43,11 +43,18 @@ class Recruitment extends CI_Controller{
 
 
     $this -> load -> model('Recruitment_model');
-    if($this -> Recruitment_model -> save_conclusion($conclusion_details)):
+    $errno = $this -> Recruitment_model -> save_conclusion($conclusion_details);
+    if($errno == 1):
       $this -> session -> set_flashdata('good', "Wysłano formularz czekaj na wynik!");
       redirect('recruitment');
-    else:
-      $this -> session -> set_flashdata('bad', "Coś poszło nie tak! Popraw dane i spróbuj ponownie");
+    elseif($errno == 345):
+      $this -> session -> set_flashdata('baseerr', "Baza nie odpowiada");
+      redirect('recruitment');
+    elseif($errno == 404):
+      $this -> session -> set_flashdata('detailserr', "Brak danych do wprowadzenia w bazie");
+      redirect('recruitment');
+    elseif($errno == 123):
+      $this -> session -> set_flashdata('existerr', "Już Pani/Pan składała wniosek na ten kierunek!");
       redirect('recruitment');
     endif;
   }
