@@ -46,7 +46,17 @@ class Recruitment_model extends CI_Model{
     endif;
   }
 
-  public function show_conslusion($which){
+  public function show_conClusions($which){
+    if($which == "all"):
+      $this->db->select('*');
+      $this->db->from('recruitment_conclusion');
+      $this->db->join('student', 'student.st_id = recruitment_conclusion.st_id');
+      $this->db->join('study_way', 'study_way.sw_id = recruitment_conclusion.sw_id');
+      $query = $this->db->get();
+      //var_dump($query -> result_array());
+      return $query -> result_array();
+    elseif(is_numeric($which)):
 
+    endif;
   }
 }

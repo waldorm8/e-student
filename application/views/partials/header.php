@@ -103,7 +103,7 @@
               <span class="visuallyhidden">Accounts</span>
             </button>
             <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
-              <li class="mdl-menu__item">Dodaj zdjęcie</li>
+              <a href="<?php echo site_url('user_details');?>"<li class="mdl-menu__item">Dodaj zdjęcie</li>
               <a href="<?php echo base_url() ?>login/logout"><li class="mdl-menu__item">Wyloguj</li></a>
             </ul>
           </div>

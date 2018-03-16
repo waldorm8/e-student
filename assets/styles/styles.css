@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 html, body {
   font-family: 'Roboto', 'Helvetica', sans-serif;
 }
@@ -213,3 +212,12 @@ _:-ms-input-placeholder, :root .demo-graph {
       -ms-flex-align: center;
           align-items: center;
 }
+
+/*author css */
+.form-check{
+  margin-left:20px;
+}
+
+
+
+/**********/

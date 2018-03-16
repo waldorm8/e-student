@@ -2,7 +2,7 @@
   <a class="mdl-navigation__link" href="<?php echo site_url('dashboard'); ?>"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Strona główna</a>
   <a class="mdl-navigation__link" href="<?php echo site_url('user_details'); ?>"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">assignment_ind</i>Dane studenta</a>
   <a style="background-color:rgb(64,196,255);" class="mdl-navigation__link" href="<?php echo site_url('recruitment') ?>"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">stars</i>Rekrutacja</a>
-  <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">forum</i>Wiadomosci</a>
+  <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">forum</i>Wiadomości</a>
   <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">school</i>Kierunki studiów</a>
   <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">domain</i>Akademiki</a>
   <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">dashboard</i>Plany zajęć</a>
@@ -64,7 +64,9 @@
               <input required type="text" placeholder="zakres: 2-6" pattern="[2-6]{1}" name="english_degree" class="form-control">
               <label for="">Ocena z informatyki lub fizyki</label>
               <input required type="text" placeholder="zakres: 2-6" pattern="[2-6]{1}" name="add_degree" class="form-control">
-              <label id="label" for="study_way">Ocena z zachowania</label>
+              <label for="">Średnia wszystkich ocen</label>
+              <input required type="text" name="average_degree" class="form-control">
+              <label for="study_way">Ocena z zachowania</label>
               <select required name="behavior_degree" class="form-control">
                 <option></option>
                 <option value="6">Wzorowy</option>
@@ -83,6 +85,12 @@
               <input required type="number" min="30" max="100" placeholder="zakres: 30-100" name="english_score" class="form-control">
               <label for="">Wynik z przedmiotu dodatkowego (matematyka-poziom rozszerzony lub informatyka lub fizyka)</label>
               <input required type="number" min="0" max="100" class="form-control" name="additional_score" placeholder="Jeśli nie pisano wpisz 0">
+              <div class="form-check">
+                <input required class="form-check-input" type="checkbox" name="defaultCheck1" id="defaultCheck1" value="">
+                <label class="form-check-label" for="defaultCheck1">
+                  Potwierdzam, że wszystkie dane są zgodne ze świadectwem maturalnym.
+                </label>
+              </div>
               <button type="submit" class="btn btn-primary btn-lg btn-block">Złóż na studia!</button>
             </div>
             <?php echo form_close(); ?>
@@ -99,6 +107,8 @@
               <input required type="text" placeholder="zakres: 2-6" pattern="[2-6]{1}" name="english_degree" class="form-control">
               <label for="">Ocena z informatyki lub fizyki</label>
               <input required type="text" placeholder="zakres: 2-6" pattern="[2-6]{1}" name="add_degree" class="form-control">
+              <label for="">Średnia wszystkich ocen</label>
+              <input required type="text" name="average_degree" class="form-control">
               <label id="label" for="study_way">Ocena z zachowania</label>
               <select required name="behavior_degree" class="form-control" id>
                 <option></option>
@@ -118,6 +128,12 @@
               <input required type="number" min="30" max="100" placeholder="zakres: 30-100" name="english_score" class="form-control">
               <label for="">Wynik z przedmiotu dodatkowego (matematyka - poziom rozszerzony, informatyka, fizyka)</label>
               <input required type="number" min="0" max="100" class="form-control" name="additional_score" placeholder="Jeśli nie pisano wpisz 0">
+              <div class="form-check">
+                <input required class="form-check-input" type="checkbox" name="defaultCheck1" id="defaultCheck1" value="">
+                <label class="form-check-label" for="defaultCheck1">
+                  Potwierdzam, że wszystkie dane są zgodne ze świadectwem maturalnym.
+                </label>
+              </div>
               <button type="submit" class="btn btn-primary btn-lg btn-block">Złóż na studia!</button>
             </div>
           <?php echo form_close(); ?>
@@ -134,6 +150,8 @@
               <input required type="text" placeholder="zakres: 2-6" pattern="[2-6]{1}" name="english_degree" class="form-control">
               <label for="">Ocena z historii lub WOS</label>
               <input required type="text" placeholder="zakres: 2-6" pattern="[2-6]{1}" name="add_degree" class="form-control">
+              <label for="">Średnia wszystkich ocen</label>
+              <input required type="text" name="average_degree" class="form-control">
               <label id="label" for="study_way">Ocena z zachowania</label>
               <select required name="behavior_degree" class="form-control">
                 <option></option>
@@ -152,7 +170,13 @@
               <label for="">Wynik z języka angielskiego</label>
               <input required type="number" min="30" max="100" placeholder="zakres: 30-100" name="english_score" class="form-control">
               <label for="">Wynik z przedmiotu dodatkowego (język polski - poziom rozszerzony lub historia lub wos)</label>
-              <input required type="number" min="0" max="100" class="form-control" placeholder="Jeśli nie pisano wpisz 0">
+              <input required type="number" min="0" max="100" class="form-control" name="additional_score" placeholder="Jeśli nie pisano wpisz 0">
+              <div class="form-check">
+                <input required class="form-check-input" type="checkbox" name="defaultCheck1" id="defaultCheck1" value="">
+                <label class="form-check-label" for="defaultCheck1">
+                  Potwierdzam, że wszystkie dane są zgodne ze świadectwem maturalnym.
+                </label>
+              </div>
               <button type="submit" class="btn btn-primary btn-lg btn-block">Złóż na studia!</button>
             </div>
           <?php echo form_close(); ?>
@@ -169,6 +193,8 @@
               <input required type="text" placeholder="zakres: 2-6" pattern="[2-6]{1}" name="english_degree" class="form-control">
               <label for="">Ocena z chemii lub biologii</label>
               <input required type="text" placeholder="zakres: 2-6" pattern="[2-6]{1}" name="add_degree" class="form-control">
+              <label for="">Średnia wszystkich ocen</label>
+              <input required type="text" name="average_degree" class="form-control">
               <label id="label" for="study_way">Oceny z zachowania</label>
               <select required name="behavior_degree" class="form-control">
                 <option></option>
@@ -188,6 +214,12 @@
               <input required type="number" min="30" max="100" placeholder="zakres: 30-100" name="english_score" class="form-control">
               <label for="">Wynik z przedmiotu dodatkowego (biologia, chemia)</label>
               <input required type="number" min="0" max="100" class="form-control" name="additional_score" placeholder="Jeśli nie pisano wpisz 0">
+              <div class="form-check">
+                <input required class="form-check-input" type="checkbox" name="defaultCheck1" id="defaultCheck1" value="">
+                <label class="form-check-label" for="defaultCheck1">
+                  Potwierdzam, że wszystkie dane są zgodne ze świadectwem maturalnym.
+                </label>
+              </div>
               <button type="submit" class="btn btn-primary btn-lg btn-block">Złóż na studia!</button>
             </div>
           <?php echo form_close(); ?>
@@ -204,6 +236,8 @@
               <input required type="text" placeholder="zakres: 2-6" pattern="[2-6]{1}" name="english_degree" class="form-control">
               <label for="">Ocena z wybranego języka obcego</label>
               <input required type="text" placeholder="zakres: 2-6" pattern="[2-6]{1}" name="add_degree" class="form-control">
+              <label for="">Średnia wszystkich ocen</label>
+              <input required type="text" name="average_degree" class="form-control">
               <label id="label" for="study_way">Oceny z zachowania</label>
               <select required name="behavior_degree" class="form-control">
                 <option></option>
@@ -222,7 +256,12 @@
               <label for="">Wynik z języka angielskiego</label>
               <input required type="number" min="30" max="100" placeholder="zakres: 30-100" name="english_score" class="form-control">
               <label for="">Wynik z przedmiotu dodatkowego (język obcy dodatkowy lub angielski na poziomie rozszerzonym)</label>
-              <input required type="number" min="0" max="100" class="form-control" name="additional_score" placeholder="Jeśli nie pisano wpisz 0">
+              <input required type="number" min="0" max="100" class="form-control" name="additional_score" placeholder="Jeśli nie pisano wpisz 0"><div class="form-check">
+                <input required class="form-check-input" type="checkbox" name="defaultCheck1" id="defaultCheck1" value="">
+                <label class="form-check-label" for="defaultCheck1">
+                  Potwierdzam, że wszystkie dane są zgodne ze świadectwem maturalnym.
+                </label>
+              </div>
               <button type="submit" class="btn btn-primary btn-lg btn-block">Złóż na studia!</button>
             </div>
           <?php echo form_close(); ?>

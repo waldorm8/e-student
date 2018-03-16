@@ -34,6 +34,7 @@ class Recruitment extends CI_Controller{
               'rc_math_degree' => $this -> input -> post('math_degree'),
               'rc_english_degree' => $this -> input -> post('english_degree'),
               'rc_st_additional' => $this -> input -> post('add_degree'),
+              'rc_average_degree' => $this -> input -> post('average_degree'),
               'rc_behavior' => $this -> input -> post('behavior_degree'),
               'rc_polish_score' => $this -> input -> post('polish_score'),
               'rc_math_score' => $this -> input -> post('math_score'),
