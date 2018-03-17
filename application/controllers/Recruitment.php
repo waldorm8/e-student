@@ -25,8 +25,28 @@ class Recruitment extends CI_Controller{
     }
   }
 
-  function save_conclusion(){
+  private function calculate_points($scores, $rates){
+    /*
+      polish*0.6*waga(0.35)
+      math*0,6*waga(0,05)
+      english*0.6*waga(0,3)
+      additional*1*waga(0,15)
+    */
+    if(isset($scores) && isset($rates)){
+      $polish_result = $scores['polish']*$rates['polish_rate']*$rates['polish_wage'];
+      $math_result = $scores['math']*$rates['math_rate']*$rates['math_wage'];
+      $english_result = $scores['english']*$rates['english_rate']*$rates['english_wage'];
+      $additional_result = $scores['additional']*$rates['add_rate']*$rates['add_wage'];
+      $result = $polish_result+$math_result+$english_result+$additional_result;
+      return $result;
+    }
+    else{
+      return 'error';
+    }
+  }
 
+  function save_conclusion(){
+    $today = date('Y-m-d H:i:s');
     $conclusion_details = array( // details from user conclusion
               'sw_id' => $this -> input -> post('way'),
               'st_id' => $this -> session -> userdata('user_id'),
@@ -39,9 +59,31 @@ class Recruitment extends CI_Controller{
               'rc_polish_score' => $this -> input -> post('polish_score'),
               'rc_math_score' => $this -> input -> post('math_score'),
               'rc_english_score' => $this -> input -> post('english_score'),
-              'rc_add_score' => $this -> input -> post('additional_score')
+              'rc_add_score' => $this -> input -> post('additional_score'),
+              'rc_points' => 0,
+              'rc_date' => $today
     );
 
+    $scores = array(
+      'polish' => $this->input->post('polish_score'),
+      'math' => $this->input->post('math_score'),
+      'english' => $this->input->post('english_score'),
+      'additional' => $this->input->post('additional_score')
+    );
+
+    $rates = array(
+        'polish_rate' => 0.6,
+        'polish_wage' => 0.35,
+        'math_rate' => 0.6,
+        'math_wage' => 0.05,
+        'english_rate' => 0.6,
+        'english_wage' => 0.3,
+        'add_rate' => 1,
+        'add_wage' => 0.15
+    );
+
+    $points = $this -> calculate_points($scores, $rates);
+    $conclusion_details['rc_points'] = $points;
 
     $this -> load -> model('Recruitment_model');
     $errno = $this -> Recruitment_model -> save_conclusion($conclusion_details);

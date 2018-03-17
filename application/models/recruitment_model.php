@@ -52,6 +52,7 @@ class Recruitment_model extends CI_Model{
       $this->db->from('recruitment_conclusion');
       $this->db->join('student', 'student.st_id = recruitment_conclusion.st_id');
       $this->db->join('study_way', 'study_way.sw_id = recruitment_conclusion.sw_id');
+      $this->db->order_by('rc_points', 'DESC');
       $query = $this->db->get();
       //var_dump($query -> result_array());
       return $query -> result_array();
