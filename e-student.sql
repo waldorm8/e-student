@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 16 Mar 2018, 15:44
--- Wersja serwera: 10.1.30-MariaDB
--- Wersja PHP: 7.2.2
+-- Czas generowania: 17 Mar 2018, 14:41
+-- Wersja serwera: 10.1.21-MariaDB
+-- Wersja PHP: 7.0.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -108,6 +106,9 @@ CREATE TABLE `recruitment_conclusion` (
   `rc_english_score` int(3) NOT NULL,
   `rc_add_score` int(3) NOT NULL DEFAULT '0',
   `rc_behavior` int(11) NOT NULL,
+  `rc_points` double NOT NULL,
+  `rc_flag` char(16) NOT NULL DEFAULT 'o',
+  `rc_date` date NOT NULL,
   `st_id` int(11) NOT NULL,
   `sw_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -116,12 +117,11 @@ CREATE TABLE `recruitment_conclusion` (
 -- Zrzut danych tabeli `recruitment_conclusion`
 --
 
-INSERT INTO `recruitment_conclusion` (`id_rc`, `rc_polish_degree`, `rc_math_degree`, `rc_english_degree`, `rc_st_additional`, `rc_average_degree`, `rc_polish_score`, `rc_math_score`, `rc_english_score`, `rc_add_score`, `rc_behavior`, `st_id`, `sw_id`) VALUES
-(5, 3, 3, 3, 3, 3.56, 30, 30, 30, 0, 6, 12, 5),
-(6, 5, 5, 5, 5, 2.8, 30, 30, 30, 0, 3, 11, 4),
-(7, 3, 6, 5, 5, 3.23, 45, 50, 40, 0, 2, 11, 14),
-(8, 5, 3, 4, 5, 4.12, 78, 34, 79, 0, 5, 9, 11),
-(9, 3, 5, 4, 5, 4.33, 30, 56, 78, 0, 6, 12, 4);
+INSERT INTO `recruitment_conclusion` (`id_rc`, `rc_polish_degree`, `rc_math_degree`, `rc_english_degree`, `rc_st_additional`, `rc_average_degree`, `rc_polish_score`, `rc_math_score`, `rc_english_score`, `rc_add_score`, `rc_behavior`, `rc_points`, `rc_flag`, `rc_date`, `st_id`, `sw_id`) VALUES
+(20, 3, 5, 4, 5, 4, 45, 89, 98, 67, 5, 39.81, 'o', '2018-03-17', 12, 4),
+(21, 3, 5, 4, 5, 4, 45, 89, 98, 67, 5, 39.81, 'o', '2018-03-17', 12, 5),
+(22, 3, 4, 5, 3, 3.45, 34, 89, 67, 45, 4, 28.62, 'o', '2018-03-17', 9, 4),
+(23, 3, 4, 5, 4, 3.56, 45, 65, 78, 34, 3, 30.54, 'o', '2018-03-17', 11, 10);
 
 -- --------------------------------------------------------
 
@@ -215,31 +215,31 @@ INSERT INTO `study_way` (`sw_id`, `sw_name`, `sw_type`, `d_id`) VALUES
 --
 
 --
--- Indeksy dla tabeli `academic`
+-- Indexes for table `academic`
 --
 ALTER TABLE `academic`
   ADD PRIMARY KEY (`ac_id`);
 
 --
--- Indeksy dla tabeli `departements`
+-- Indexes for table `departements`
 --
 ALTER TABLE `departements`
   ADD PRIMARY KEY (`d_id`);
 
 --
--- Indeksy dla tabeli `messages`
+-- Indexes for table `messages`
 --
 ALTER TABLE `messages`
   ADD PRIMARY KEY (`mess_id`);
 
 --
--- Indeksy dla tabeli `news`
+-- Indexes for table `news`
 --
 ALTER TABLE `news`
   ADD PRIMARY KEY (`n_id`);
 
 --
--- Indeksy dla tabeli `recruitment_conclusion`
+-- Indexes for table `recruitment_conclusion`
 --
 ALTER TABLE `recruitment_conclusion`
   ADD PRIMARY KEY (`id_rc`),
@@ -247,14 +247,14 @@ ALTER TABLE `recruitment_conclusion`
   ADD KEY `FK_recruitment_way` (`sw_id`);
 
 --
--- Indeksy dla tabeli `speciality`
+-- Indexes for table `speciality`
 --
 ALTER TABLE `speciality`
   ADD PRIMARY KEY (`sp_id`),
   ADD KEY `FK_speciality` (`sw_id`);
 
 --
--- Indeksy dla tabeli `student`
+-- Indexes for table `student`
 --
 ALTER TABLE `student`
   ADD PRIMARY KEY (`st_id`),
@@ -262,7 +262,7 @@ ALTER TABLE `student`
   ADD KEY `student_study_way` (`study_way_sw_id`);
 
 --
--- Indeksy dla tabeli `study_way`
+-- Indexes for table `study_way`
 --
 ALTER TABLE `study_way`
   ADD PRIMARY KEY (`sw_id`),
@@ -277,49 +277,41 @@ ALTER TABLE `study_way`
 --
 ALTER TABLE `academic`
   MODIFY `ac_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT dla tabeli `departements`
 --
 ALTER TABLE `departements`
   MODIFY `d_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT dla tabeli `messages`
 --
 ALTER TABLE `messages`
   MODIFY `mess_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT dla tabeli `news`
 --
 ALTER TABLE `news`
   MODIFY `n_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
 --
 -- AUTO_INCREMENT dla tabeli `recruitment_conclusion`
 --
 ALTER TABLE `recruitment_conclusion`
-  MODIFY `id_rc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
+  MODIFY `id_rc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT dla tabeli `speciality`
 --
 ALTER TABLE `speciality`
   MODIFY `sp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT dla tabeli `student`
 --
 ALTER TABLE `student`
   MODIFY `st_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
 --
 -- AUTO_INCREMENT dla tabeli `study_way`
 --
 ALTER TABLE `study_way`
   MODIFY `sw_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
 --
 -- Ograniczenia dla zrzutów tabel
 --
@@ -349,7 +341,6 @@ ALTER TABLE `student`
 --
 ALTER TABLE `study_way`
   ADD CONSTRAINT `FK_study_way` FOREIGN KEY (`d_id`) REFERENCES `departements` (`d_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
