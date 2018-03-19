@@ -27,7 +27,7 @@ class Show_conclusions extends CI_Controller{
       else{
         redirect('login', 'refresh');
       }
-      }
+    }
   }
 
   public function change_flag(){
@@ -37,7 +37,7 @@ class Show_conclusions extends CI_Controller{
     if($this -> Recruitment_model -> change_flag($rc_id)):
       redirect('show_conclusions');
     else:
-      redirect('Show_conclusions');
+      redirect('show_conclusions');
     endif;
   }
 

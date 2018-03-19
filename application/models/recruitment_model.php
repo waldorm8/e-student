@@ -75,7 +75,7 @@ class Recruitment_model extends CI_Model{
     foreach($result as $row){
       $flag = $row['rc_flag'];
     }
-    $this -> session -> set_flashdata('dump', $flag);
+    
 
     if($flag == 'p'):
       $data = array(
