@@ -46,7 +46,7 @@ class Recruitment_model extends CI_Model{
     endif;
   }
 
-  public function show_conClusions($which){
+  public function show_conclusions($which){
     if($which == "all"):
       $this->db->select('*');
       $this->db->from('recruitment_conclusion');
@@ -57,7 +57,43 @@ class Recruitment_model extends CI_Model{
       //var_dump($query -> result_array());
       return $query -> result_array();
     elseif(is_numeric($which)):
-
+      $this->db->select('*');
+      $this->db->from('recruitment_conclusion');
+      $this->db->where('rc_id', $which);
+      $query=$this->db->get();
+      return $query -> result_array();
     endif;
+  }
+  public function change_flag($id_rc){
+    $this -> db -> select('*');
+    $this -> db -> from('recruitment_conclusion');
+    $this -> db -> where('id_rc', (int)$id_rc);
+    $query = $this -> db -> get();
+    $result = $query -> result_array();
+
+    $flag = null;
+    foreach($result as $row){
+      $flag = $row['rc_flag'];
+    }
+    $this -> session -> set_flashdata('dump', $flag);
+
+    if($flag == 'p'):
+      $data = array(
+        'rc_flag' => 'o'
+      );
+    elseif($flag == 'o'):
+      $data = array(
+        'rc_flag' => 'p'
+      );
+    endif;
+
+    if($flag != null){
+      $this->db->where('id_rc', $id_rc);
+      if($this->db->update('recruitment_conclusion', $data)):
+        return 1;
+      else:
+        return 0;
+      endif;
+    }
   }
 }

@@ -24,6 +24,7 @@
                             <th scope="col">Średnia ocen</th>
                             <th scope="col">Punkty</th>
                             <th scope="col">Data złożenia</th>
+                            <th scope="col">Stan</th>
                             <th scope="col">Nawigacja</th>
                           </tr>
                         </thead>
@@ -39,11 +40,27 @@
                             <td><?php echo $row['rc_average_degree']; ?></td>
                             <td><?php echo $row['rc_points']; ?></td>
                             <td><?php echo $row['rc_date']; ?></td>
+                            <?php
+                              if($row['rc_flag'] == "o"):
+                                echo "<td class=\"alert alert-warning\">
+                                      <a href=".site_url(array('show_conclusions','change_flag', $row['id_rc'])).">
+                                        Oczekiwanie
+                                      </a>
+                                      </td>";
+                              elseif($row['rc_flag'] == "p"):
+                                echo "<td class=\"alert alert-success\">
+                                      <a href=".site_url(array('show_conclusions','change_flag', $row['id_rc'])).">
+                                        Przyjęty
+                                      </a>
+                                      </td>";
+                              endif;
+                            ?>
                             <td>Przyjmij, Skasuj, Edytuj</td>
                           </tr>
                           <?php } ?>
                         </tbody>
                       </table>
+                      <?php var_dump($this -> session -> flashdata('dump'));?>
                     </div>
                   </div>
                 </div>
