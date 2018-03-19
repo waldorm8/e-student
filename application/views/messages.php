@@ -31,13 +31,17 @@
                         foreach($data as $row){ ?>
                         <tr>
                           <td><?php echo $i=$i+1; ?></td>
-                          <td><?php echo $row['st_login']; ?></td>
-                          <td><?php echo $row['mess_title']; ?></td>
-                          <td><?php echo $row['mess_text']; ?></td>
+                          <td id="<?php echo $row['st_login']; ?>" class="login"><?php echo $row['st_login']; ?></td>
+                          <td class="title"><?php echo $row['mess_title']; ?></td>
+                          <td id="<?php echo $row['mess_text']; ?>"><?php echo $row['mess_text']; ?></td>
                           <td><?php echo $row['mess_date']; ?></td>
                           <td>
-                            Usuń, 
-                            Odpowiedz
+                            <button type="button" id="replyButton" class="btn btn-primary" data-toggle="modal" data-target="#replyModal">
+                              Odpowiedz
+                            </button>
+                            <button type="button" class="btn btn-danger">
+                              Usuń
+                            </button>
                           </td>
                         </tr>
                         <?php
@@ -53,3 +57,82 @@
 
       </main>
     </div>
+<a data-toggle="modal" data-target="#messageModal" href="" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">Nowa wiadomość</a>
+
+    <!-- Modal -->
+<div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Nowa wiadomość</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          <?php echo form_open(); ?>
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Do kogo?</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Login">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Tytuł</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Tytuł">
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlTextarea1">Treść wiadomości</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+              <button type="submit" class="btn btn-primary">Wyślij</button>
+            </div>
+          <?ph echo form_close();?>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="replyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Odpowiedź</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          <?php echo form_open(); ?>
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Do kogo?</label>
+                <input disabled type="text" class="form-control" id="replyTo" aria-describedby="emailHelp" placeholder="Login">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Tytuł</label>
+                <input disabled type="text" class="form-control" id="replyTitle" aria-describedby="emailHelp" placeholder="Tytuł">
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlTextarea1">Treść wiadomości</label>
+                <textarea class="form-control" id="replyText" rows="3"></textarea>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+              <button type="submit" class="btn btn-primary">Wyślij</button>
+            </div>
+          <?ph echo form_close();?>
+    </div>
+  </div>
+</div>
+<script>
+$(document).ready(function(){
+  $('#replyButton').on('click', function(){
+    var login = $('.login').attr('id');
+    var title = $('.title').html();
+    console.log(title);
+    $('#replyTo').attr('value', login);
+    $('#replyTitle').attr('value', title);
+  });
+});
+</script>
