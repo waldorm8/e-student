@@ -69,15 +69,15 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-          <?php echo form_open(); ?>
+          <?php echo form_open('messages/send_message'); ?>
             <div class="modal-body">
               <div class="form-group">
                 <label for="exampleInputEmail1">Do kogo?</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Login">
+                <input type="text" class="form-control" name="toWho" placeholder="Login">
               </div>
               <div class="form-group">
                 <label for="exampleInputEmail1">Tytuł</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Tytuł">
+                <input type="text" class="form-control" name="titleMessage" aria-describedby="emailHelp" placeholder="Tytuł">
               </div>
               <div class="form-group">
                 <label for="exampleFormControlTextarea1">Treść wiadomości</label>

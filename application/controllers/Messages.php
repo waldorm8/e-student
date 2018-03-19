@@ -27,4 +27,10 @@ class Messages extends CI_Controller{
       redirect('login','refresh');
     }
   }
+
+  public function send_message(){
+    $this -> load -> model('messages_model');
+    $this -> messages_model ->
+    
+  }
 }

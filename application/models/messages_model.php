@@ -29,4 +29,13 @@ class Messages_model extends CI_Model{
 
       return $result;
   }
+  public function send_message(){
+    $data = array(
+      'mess_title' => $this -> input -> post('toWho'),
+      'mess_text' => $this -> input -> post('titleMessage'),
+      'st_id' => $this -> session -> userdata('user_id');
+      //'to_who' => 
+    )
+    $this->db->insert('messages', $data);
+  }
 }
