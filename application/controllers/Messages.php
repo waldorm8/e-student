@@ -29,8 +29,8 @@ class Messages extends CI_Controller{
   }
 
   public function send_message(){
-    $this -> load -> model('messages_model');
-    $this -> messages_model ->
+    //$this -> load -> model('messages_model');
+    //$this -> messages_model ->
     
   }
 }

@@ -18,11 +18,11 @@ class Messages_model extends CI_Model{
     return $result;
   }*/
   public function show_messages($towho){
-      $this->db->select('mess_title,mess_text,mess_date, st_login');
+      $this->db->select('st_login,mess_title,mess_text,mess_date, mess_from_who');
       $this->db->from('messages');
-      $where = "to_who=".$towho." AND owner=0";
+      $where = "mess_to_who=".$towho." AND mess_owner=0";
       $this->db->where($where);
-      $this->db->join('student', 'student.st_id = messages.st_id');
+      $this->db->join('student', 'student.st_id = messages.mess_from_who');
       $query = $this->db->get();
       $result = $query -> result_array();
       $this -> session -> set_flashdata('dump', $result);
@@ -33,9 +33,9 @@ class Messages_model extends CI_Model{
     $data = array(
       'mess_title' => $this -> input -> post('toWho'),
       'mess_text' => $this -> input -> post('titleMessage'),
-      'st_id' => $this -> session -> userdata('user_id');
+      'st_id' => $this -> session -> userdata('user_id')
       //'to_who' => 
-    )
+    );
     $this->db->insert('messages', $data);
   }
 }
