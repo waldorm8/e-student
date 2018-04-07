@@ -51,6 +51,16 @@
                     </table>
                     <?php
                     //var_dump($this->session->flashdata('dump'));
+                    if($this -> session -> flashdata('messSent') != NULL){
+                        echo "<div class=\"alert alert-success\" role=\"alert\">";
+                        echo $this->session->flashdata('messSent');
+                        echo "</div>";
+                    }
+                    elseif($this -> session -> flashdata('messNotSent')){
+                        echo "<div class=\"alert alert-success\" role=\"alert\">";
+                        echo $this->session->flashdata('messNotSent');
+                        echo "</div>";
+                    }
                     ?>
                 </div>
               </div>
@@ -59,7 +69,7 @@
     </div>
 <a data-toggle="modal" data-target="#messageModal" href="" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">Nowa wiadomość</a>
 
-    <!-- Modal -->
+    <!-- Modal NOWA WIADOMOSC -->
 <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
@@ -81,18 +91,18 @@
               </div>
               <div class="form-group">
                 <label for="exampleFormControlTextarea1">Treść wiadomości</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <textarea name="textMessage" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
               </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
               <button type="submit" class="btn btn-primary">Wyślij</button>
             </div>
-          <?ph echo form_close();?>
+          <?php echo form_close(); ?>
     </div>
   </div>
 </div>
-
+<!-- Modal ODPOWIEDZ -->
 <div class="modal fade" id="replyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
@@ -106,22 +116,22 @@
             <div class="modal-body">
               <div class="form-group">
                 <label for="exampleInputEmail1">Do kogo?</label>
-                <input disabled type="text" class="form-control" id="replyTo" aria-describedby="emailHelp" placeholder="Login">
+                <input name="toWho" disabled type="text" class="form-control" id="replyTo" aria-describedby="emailHelp" placeholder="Login">
               </div>
               <div class="form-group">
                 <label for="exampleInputEmail1">Tytuł</label>
-                <input disabled type="text" class="form-control" id="replyTitle" aria-describedby="emailHelp" placeholder="Tytuł">
+                <input name="titleMessage" disabled type="text" class="form-control" id="replyTitle" aria-describedby="emailHelp" placeholder="Tytuł">
               </div>
               <div class="form-group">
                 <label for="exampleFormControlTextarea1">Treść wiadomości</label>
-                <textarea class="form-control" id="replyText" rows="3"></textarea>
+                <textarea name="textMessage" class="form-control" id="replyText" rows="3"></textarea>
               </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
               <button type="submit" class="btn btn-primary">Wyślij</button>
             </div>
-          <?ph echo form_close();?>
+          <?php echo form_close(); ?>
     </div>
   </div>
 </div>
