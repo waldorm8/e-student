@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 17 Mar 2018, 14:41
+-- Czas generowania: 08 Kwi 2018, 22:48
 -- Wersja serwera: 10.1.21-MariaDB
 -- Wersja PHP: 7.0.15
 
@@ -19,18 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Baza danych: `e-student`
 --
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `academic`
---
-
-CREATE TABLE `academic` (
-  `ac_id` int(11) NOT NULL,
-  `ac_name` int(11) NOT NULL,
-  `ac_describe` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -64,8 +52,29 @@ INSERT INTO `departements` (`d_id`, `d_name`, `d_street`, `d_no_building`, `d_zi
 
 CREATE TABLE `messages` (
   `mess_id` int(11) NOT NULL,
-  `mess_text` text NOT NULL
+  `mess_text` text NOT NULL,
+  `mess_title` varchar(64) NOT NULL,
+  `mess_date` datetime NOT NULL,
+  `mess_to_who` int(11) NOT NULL,
+  `mess_from_who` int(11) NOT NULL,
+  `mess_owner` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Zrzut danych tabeli `messages`
+--
+
+INSERT INTO `messages` (`mess_id`, `mess_text`, `mess_title`, `mess_date`, `mess_to_who`, `mess_from_who`, `mess_owner`) VALUES
+(1, 'fgfdhfdghfdghfdghdfghdfhfdhdfhdfh', 'fhdfhdfhfdhfh', '2018-04-02 10:28:18', 9, 9, 1),
+(2, 'fgfdhfdghfdghfdghdfghdfhfdhdfhdfh', 'fhdfhdfhfdhfh', '2018-04-02 10:28:18', 9, 9, 0),
+(3, 'sfasdfasfasdf', 'asdfsdfsafsafsadfsadf', '2018-04-03 00:00:00', 12, 12, 0),
+(4, 'sfasdfasfasdf', 'asdfsdfsafsafsadfsadf', '2018-04-03 00:00:00', 12, 12, 1),
+(5, 'do waldorm', 'do waldorm', '2018-04-03 00:00:00', 12, 9, 0),
+(6, 'do waldorm', 'do waldorm', '2018-04-03 00:00:00', 12, 9, 1),
+(7, '', 'asdasdasdasd', '2018-04-07 15:02:25', 12, 12, 0),
+(8, '', 'adasddasdasda', '2018-04-07 15:07:09', 12, 12, 0),
+(9, 'sddasdasdasd', 'asdadasdasd', '2018-04-07 15:26:06', 12, 12, 0),
+(10, 'do wldorm123', 'do waldorm123', '2018-04-07 15:28:23', 9, 12, 0);
 
 -- --------------------------------------------------------
 
@@ -215,12 +224,6 @@ INSERT INTO `study_way` (`sw_id`, `sw_name`, `sw_type`, `d_id`) VALUES
 --
 
 --
--- Indexes for table `academic`
---
-ALTER TABLE `academic`
-  ADD PRIMARY KEY (`ac_id`);
-
---
 -- Indexes for table `departements`
 --
 ALTER TABLE `departements`
@@ -230,7 +233,9 @@ ALTER TABLE `departements`
 -- Indexes for table `messages`
 --
 ALTER TABLE `messages`
-  ADD PRIMARY KEY (`mess_id`);
+  ADD PRIMARY KEY (`mess_id`),
+  ADD KEY `messages` (`mess_to_who`),
+  ADD KEY `fk_messages_from_who` (`mess_from_who`);
 
 --
 -- Indexes for table `news`
@@ -273,11 +278,6 @@ ALTER TABLE `study_way`
 --
 
 --
--- AUTO_INCREMENT dla tabeli `academic`
---
-ALTER TABLE `academic`
-  MODIFY `ac_id` int(11) NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT dla tabeli `departements`
 --
 ALTER TABLE `departements`
@@ -286,7 +286,7 @@ ALTER TABLE `departements`
 -- AUTO_INCREMENT dla tabeli `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `mess_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `mess_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT dla tabeli `news`
 --
@@ -315,6 +315,13 @@ ALTER TABLE `study_way`
 --
 -- Ograniczenia dla zrzutów tabel
 --
+
+--
+-- Ograniczenia dla tabeli `messages`
+--
+ALTER TABLE `messages`
+  ADD CONSTRAINT `fk_messages_from_who` FOREIGN KEY (`mess_from_who`) REFERENCES `student` (`st_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `messages` FOREIGN KEY (`mess_to_who`) REFERENCES `student` (`st_id`);
 
 --
 -- Ograniczenia dla tabeli `recruitment_conclusion`
