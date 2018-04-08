@@ -29,10 +29,20 @@ class Messages_model extends CI_Model{
 
       return $result;
   }
+
   public function send_message($data){
 
-    //var_dump($data);
-    //exit();
+
+    print_r($data);
+    if(is_numeric($data['mess_to_who'])){
+      echo "tak jest numerem";
+    }
+    else{
+      echo "nie jest numerem";
+    }
+
+
+    exit();
     if($this->db->insert('messages', $data)){
       return 1;
     }
