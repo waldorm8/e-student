@@ -11,7 +11,19 @@ class Catalog extends CI_Controller{
 
   function index()
   {
+    if($this -> session -> userdata('user_id') != NULL){
+			$user_id = $this -> session -> userdata('user_id');
+			$this -> session -> set_userdata('page', 'Katalog');
+	    //$this -> load -> model('catalog');
+      //$this -> catalog -> ;
 
+			$this -> load -> view('partials/header');
+			$this -> load -> view('catalog');
+			$this -> load -> view('partials/footer');
+		}
+		else{
+			redirect('login','refresh');
+		}
   }
 
 }
