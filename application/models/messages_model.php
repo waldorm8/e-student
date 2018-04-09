@@ -18,9 +18,9 @@ class Messages_model extends CI_Model{
     return $result;
   }*/
   public function show_messages($towho){
-      $this->db->select('st_login,mess_title,mess_text,mess_date, mess_from_who');
+      $this->db->select('mess_id, st_login, mess_title, mess_text, mess_date, mess_from_who');
       $this->db->from('messages');
-      $where = "mess_to_who=".$towho." AND mess_owner=0";
+      $where = "mess_to_who=".$towho."";
       $this->db->where($where);
       $this->db->join('student', 'student.st_id = messages.mess_from_who');
       $query = $this->db->get();
@@ -31,23 +31,37 @@ class Messages_model extends CI_Model{
   }
 
   public function send_message($data){
-
-
-    print_r($data);
     if(is_numeric($data['mess_to_who'])){
-      echo "tak jest numerem";
+      if($this->db->insert('messages', $data)):
+        return 1;
+      else:
+        return 0;
+      endif;
     }
     else{
-      echo "nie jest numerem";
+      $this->db->select('st_id');
+      $this->db->from('student');
+      $this->db->where('st_login', $data['mess_to_who']);
+      $query = $this->db->get();
+      $result = $query -> row();
+      $to_who = $result -> st_id;
+
+      $data['mess_to_who'] = $to_who;
+
+      if($this->db->insert('messages', $data)):
+        return 1;
+      else:
+        return 0;
+      endif;
     }
+  }
 
-
-    exit();
-    if($this->db->insert('messages', $data)){
+  public function delete_message($mess_id){
+    $this->db->where('mess_id', $mess_id);
+    if($this->db->delete('messages') == 1):
       return 1;
-    }
-    else{
+    else:
       return 0;
-    }
+    endif;
   }
 }

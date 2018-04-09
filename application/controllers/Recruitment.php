@@ -12,13 +12,23 @@ class Recruitment extends CI_Controller{
   function index()
   {
     if($this -> session -> userdata('user_id') != NULL){
+      $user_id = $this->session->userdata('user_id');
       $this -> load -> helper('form');
       $this -> load -> model('Recruitment_model');
       $ways['ways'] = $this -> Recruitment_model -> get_study_way('all');
+      $data['data'] = $this -> Recruitment_model -> show_conclusions(null, $user_id);
+      $all = $data + $ways;
+      //print_r($all);
+      //exit();
       $this -> session -> set_userdata('page', 'Rekrutacja');
       $this -> load -> view('partials/header');
-      $this -> load -> view('recruitment', $ways);
+      $this -> load -> view('recruitment', $all);
       $this -> load -> view('partials/footer');
+
+      //$data['data'] = $this -> Recruitment_model -> show_conclusions(null, $user_id);
+      //$this -> load -> view('partials/header');
+      //$this -> load -> view('recruitment', $data);
+      //$this -> load -> view('partials/footer');
     }
     else{
       redirect('login', 'refresh');

@@ -11,7 +11,18 @@ class Messages extends CI_Controller{
 
   function index()
   {
-    if($this -> session -> userdata('user_id') != NULL){
+    if($this -> session -> userdata('user_id') != NULL && $this -> session -> userdata('role') == 'admin'){
+      $user_id = $this -> session -> userdata('user_id');
+      $this -> load -> helper('form');
+			$this -> session -> set_userdata('page', 'Wiadomości');
+      $this -> load -> model('Messages_model');
+      $data['data'] = $this -> Messages_model -> show_messages($user_id);
+
+      $this -> load -> view('partials/admin_header');
+      $this -> load -> view('admin_messages',$data);
+      $this -> load -> view('partials/admin_footer');
+    }
+    elseif($this -> session -> userdata('user_id') != NULL){
 			$user_id = $this -> session -> userdata('user_id');
       $this -> load -> helper('form');
 			$this -> session -> set_userdata('page', 'Wiadomości');
@@ -40,6 +51,7 @@ class Messages extends CI_Controller{
       if($this -> form_validation -> run() == FALSE){
         $this -> load -> helper('form');
         $this -> index();
+        echo "test odp niewysyla formularza";
       }
       else{
         $this -> load -> model('messages_model');
@@ -49,7 +61,6 @@ class Messages extends CI_Controller{
         'mess_from_who' => $this -> session -> userdata('user_id'),
         'mess_to_who' => $this -> input -> post('toWho'),
         'mess_date' => $today,
-        'mess_owner' => 0
         );
 
         if($this -> messages_model -> send_message($data) == 1){
@@ -61,5 +72,20 @@ class Messages extends CI_Controller{
           redirect('messages','refresh');
         }
       }
+  }
+
+  public function delete_message(){
+    $this -> load -> model('messages_model');
+    $mess_id = $this -> uri -> segment(3);
+
+    $status = $this -> messages_model -> delete_message($mess_id);
+
+    if($status == 1):
+      $this->session->set_flashdata('successDel', 'Pomyślnie usunięto wiadomość.');
+      redirect('messages');
+    else:
+      $this->session->set_flashdata('errDel', 'Nie usunięto wiadomości, coś poszło nie tak.');
+      redirect('messages');
+    endif;
   }
 }

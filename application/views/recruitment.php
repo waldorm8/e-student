@@ -3,8 +3,7 @@
   <a class="mdl-navigation__link" href="<?php echo site_url('user_details'); ?>"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">assignment_ind</i>Dane studenta</a>
   <a style="background-color:rgb(64,196,255);" class="mdl-navigation__link" href="<?php echo site_url('recruitment') ?>"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">stars</i>Rekrutacja</a>
   <a class="mdl-navigation__link" href="<?php echo site_url('messages'); ?>"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">forum</i>Wiadomości</a>
-  <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">school</i>Kierunki studiów</a>
-  <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">domain</i>Akademiki</a>
+  <a class="mdl-navigation__link" href="<?php echo site_url('catalog'); ?>"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">school</i>Kierunki studiów</a>
   <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">dashboard</i>Plany zajęć</a>
   <div class="mdl-layout-spacer"></div>
   <!--<a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">help_outline</i><span class="visuallyhidden">Help</span></a>-->
@@ -265,6 +264,48 @@
               <button type="submit" class="btn btn-primary btn-lg btn-block">Złóż na studia!</button>
             </div>
           <?php echo form_close(); ?>
+        </div>
+      </div>
+      <div class="mdl-grid demo-content">
+        <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid content">
+          <h2 class="mdl-card__title-text title">Twoje wnioski na studia:</h2>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Id</th>
+                <th scope="col">Kierunek</th>
+                <th scope="col">Średnia ocen</th>
+                <th scope="col">Punkty</th>
+                <th scope="col">Data złożenia</th>
+                <th scope="col">Stan</th>
+              </tr>
+              <?php
+              $i = 0;
+              foreach($data as $row){
+              ?>
+              <tr>
+                <td><?php echo $i=$i+1; ?></td>
+                <td><?php echo $row['id_rc']; ?></td>
+                <td><?php echo $row['sw_name']; ?></td>
+                <td><?php echo $row['rc_average_degree']; ?></td>
+                <td><?php echo $row['rc_points']; ?></td>
+                <td><?php echo $row['rc_date']; ?></td>
+                <?php
+                    if($row['rc_flag'] == "p"):
+                      echo "<td class=\"alert alert-success\">Przyjęty</td>";
+                    elseif($row['rc_flag'] == "o"):
+                      echo "<td class=\"alert alert-warning\">Oczekiwanie</td>";
+                    endif;
+                 ?>
+              </tr>
+              <?php
+              }
+              ?>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
         </div>
       </div>
 </main>

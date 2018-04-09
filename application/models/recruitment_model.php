@@ -46,8 +46,8 @@ class Recruitment_model extends CI_Model{
     endif;
   }
 
-  public function show_conclusions($which){
-    if($which == "all"):
+  public function show_conclusions($which, $whichStudent){
+    if($which == "all" && $whichStudent == NULL):
       $this->db->select('*');
       $this->db->from('recruitment_conclusion');
       $this->db->join('student', 'student.st_id = recruitment_conclusion.st_id');
@@ -56,14 +56,22 @@ class Recruitment_model extends CI_Model{
       $query = $this->db->get();
       //var_dump($query -> result_array());
       return $query -> result_array();
-    elseif(is_numeric($which)):
+    elseif(is_numeric($which) && $whichStudent == NULL):
       $this->db->select('*');
       $this->db->from('recruitment_conclusion');
       $this->db->where('rc_id', $which);
       $query=$this->db->get();
       return $query -> result_array();
+    elseif($which == NULL && is_numeric($whichStudent)):
+      $this->db->select('*');
+      $this->db->from('recruitment_conclusion');
+      $this->db->join('study_way', 'study_way.sw_id = recruitment_conclusion.sw_id');
+      $this->db->where('st_id', $whichStudent);
+      $query = $this->db->get();
+      return $query -> result_array();
     endif;
   }
+
   public function change_flag($id_rc){
     $this -> db -> select('*');
     $this -> db -> from('recruitment_conclusion');
@@ -75,7 +83,7 @@ class Recruitment_model extends CI_Model{
     foreach($result as $row){
       $flag = $row['rc_flag'];
     }
-    
+
 
     if($flag == 'p'):
       $data = array(
