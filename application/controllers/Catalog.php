@@ -14,11 +14,10 @@ class Catalog extends CI_Controller{
     if($this -> session -> userdata('user_id') != NULL){
 			$user_id = $this -> session -> userdata('user_id');
 			$this -> session -> set_userdata('page', 'Katalog');
-	    //$this -> load -> model('catalog');
-      //$this -> catalog -> ;
-
+	    $this -> load -> model('catalog_model');
+      $data['ways'] = $this -> catalog_model -> get_ways();
 			$this -> load -> view('partials/header');
-			$this -> load -> view('catalog');
+			$this -> load -> view('catalog', $data);
 			$this -> load -> view('partials/footer');
 		}
 		else{
