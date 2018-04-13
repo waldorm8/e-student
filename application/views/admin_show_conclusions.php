@@ -24,6 +24,16 @@
                         echo $this->session->flashdata('deleteError');
                         echo "</div>";
                       }
+                      elseif($this -> session ->flashdata('editSucc') != NULL){
+                        echo "<div class=\"alert alert-success\" role=\"alert\">";
+                        echo $this->session->flashdata('editSucc');
+                        echo "</div>";
+                      }
+                      elseif($this -> session ->flashdata('editErr') != NULL){
+                        echo "<div class=\"alert alert-warning\" role=\"alert\">";
+                        echo $this->session->flashdata('editErr');
+                        echo "</div>";
+                      }
                      ?>
                     <div class="mdl-card__supporting-text text">
                       <table class="table table-hover">
@@ -46,7 +56,7 @@
                           foreach($data as $row){?>
                           <tr>
                             <th><?php echo $i =$i+1; ?></th>
-                            <td><?php echo $row['st_id']; ?></td>
+                            <td><?php echo $row['id_rc']; ?></td>
                             <td><?php echo $row['st_name']." ".$row['st_surname']; ?></td>
                             <td><?php echo $row['sw_name']; ?></td>
                             <td><?php echo $row['rc_average_degree']; ?></td>
@@ -67,7 +77,7 @@
                                       </td>";
                               endif;
                             ?>
-                            <td><a href="<?php echo site_url('show_conclusions/delete_conclussion/'); ?><?php echo $row['id_rc']; ?>">Skasuj</a> <a href="">Edytuj</a></td>
+                            <td><a href="<?php echo site_url('show_conclusions/delete_conclussion/'); ?><?php echo $row['id_rc']; ?>">Skasuj</a> <span style="cursor:pointer;" id="<?php echo $row['id_rc']; ?>" class="edit">Edytuj</span></td>
                           </tr>
                           <?php } ?>
                         </tbody>
@@ -75,5 +85,47 @@
                     </div>
                   </div>
                 </div>
+                <div class="mdl-grid demo-content edit-form">
+                  <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid content">
+                <?php echo form_open('show_conclusions/edit_conclusion'); ?>
+                <div class="form-group">
+                  <h3>Edycja</h3>
+                  <label for="">Ocena z języka polskiego</label>
+                  <input required type="text" placeholder="zakres: 2-6" pattern="[2-6]{1}" name="polish_degree" class="form-control">
+                  <label for="">Ocena z matematyki</label>
+                  <input required type="text" placeholder="zakres: 2-6" pattern="[2-6]{1}" name="math_degree" class="form-control">
+                  <label for="">Ocena z języka angielskiego</label>
+                  <input required type="text" placeholder="zakres: 2-6" pattern="[2-6]{1}" name="english_degree" class="form-control">
+                  <label for="">Ocena z przedmiotu dodatkowego(zależnie od kierunku   )</label>
+                  <input required type="text" placeholder="zakres: 2-6" pattern="[2-6]{1}" name="add_degree" class="form-control">
+                  <label for="">Średnia ocen</label>
+                  <input required type="text" name="average_degree" class="form-control">
+                  <label for="study_way">Ocena z zachowania</label>
+                  <select required name="behavior_degree" class="form-control">
+                    <option></option>
+                    <option value="6">Wzorowy</option>
+                    <option value="5">Bardzo dobry</option>
+                    <option value="4">Dobry</option>
+                    <option value="3">Poprawny</option>
+                    <option value="2">Naganny</option>
+                    <option value="1">Nieodpowiedni</option>
+                  </select>
+                  <h4>Wpisz procentowe wyniki matury</h4>
+                  <label for="">Wynik z języka polskiego</label>
+                  <input required type="number" min="30" max="100" placeholder="zakres: 30-100" name="polish_score" class="form-control">
+                  <label for="">Wynik z matematyki poziom podstawowy</label>
+                  <input required type="number" min="30" max="100" placeholder="zakres: 30-100" name="math_score" class="form-control">
+                  <label for="">Wynik z języka angielskiego</label>
+                  <input required type="number" min="30" max="100" placeholder="zakres: 30-100" name="english_score" class="form-control">
+                  <label for="">Wynik z przedmiotu dodatkowego (matematyka-poziom rozszerzony lub informatyka lub fizyka)</label>
+                  <input required type="number" min="0" max="100" class="form-control" name="additional_score" placeholder="Jeśli nie pisano wpisz 0">
+                  <div class="form-check">
+                  </div>
+                  <button type="submit" name="zapisz" class="btn btn-primary btn-lg btn-block">Zapisz</button>
+                </div>
+                <?php echo form_close(); ?>
+              </div>
+            </div>
       </main>
     </div>
+    <script src="assets/js/edit.js"></script>

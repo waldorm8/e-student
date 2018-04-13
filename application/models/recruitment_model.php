@@ -54,7 +54,6 @@ class Recruitment_model extends CI_Model{
       $this->db->join('study_way', 'study_way.sw_id = recruitment_conclusion.sw_id');
       $this->db->order_by('rc_points', 'DESC');
       $query = $this->db->get();
-      //var_dump($query -> result_array());
       return $query -> result_array();
     elseif(is_numeric($which) && $whichStudent == NULL):
       $this->db->select('*');
@@ -108,6 +107,15 @@ class Recruitment_model extends CI_Model{
   public function delete_conclussion($id_conclussion){
     $this->db->where('id_rc', $id_conclussion);
     if($this->db->delete('recruitment_conclusion')):
+      return 1;
+    else:
+      return 0;
+    endif;
+  }
+
+  public function edit_conclusion($id_rc, $data){
+    $this->db->where('id_rc', $id_rc);
+    if($this->db->update('recruitment_conclusion', $data)):
       return 1;
     else:
       return 0;
