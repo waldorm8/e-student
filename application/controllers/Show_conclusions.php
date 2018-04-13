@@ -39,4 +39,17 @@ class Show_conclusions extends CI_Controller{
     endif;
   }
 
+  public function delete_conclussion(){
+    $conclussion_id = $this -> uri -> segment(3);
+    $this -> load -> model('Recruitment_model');
+    if($this -> Recruitment_model -> delete_conclussion($conclussion_id)){
+      $this -> session -> set_flashdata("deletedConc", "Pomyślnie usunięto wniosek.");
+      redirect('show_conclusions');
+    }
+    else{
+      $this -> session -> set_flashdata("deleteError", "Wystąpił błąd podczas usuwania wniosku.");
+      redirect('show_conclusions');
+    }
+  }
+
 }

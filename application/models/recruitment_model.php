@@ -104,4 +104,13 @@ class Recruitment_model extends CI_Model{
       endif;
     }
   }
+
+  public function delete_conclussion($id_conclussion){
+    $this->db->where('id_rc', $id_conclussion);
+    if($this->db->delete('recruitment_conclusion')):
+      return 1;
+    else:
+      return 0;
+    endif;
+  }
 }

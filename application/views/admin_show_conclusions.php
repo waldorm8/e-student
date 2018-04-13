@@ -4,7 +4,7 @@
           <a style="background-color:rgb(64,196,255);" class="mdl-navigation__link" href="<?php echo site_url('show_conslusion'); ?>"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">stars</i>Lista wniosków na studia</a>
           <a class="mdl-navigation__link" href="<?php echo site_url('recruitment_settings'); ?>"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">domain</i>Ustawienia rekrutacji</a>
           <a class="mdl-navigation__link" href="<?php echo site_url('messages'); ?>"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">forum</i>Wyślij wiadomość do student</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">school</i>Dodaj kierunuki</a>
+          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">school</i>Dodaj kierunki</a>
           <div class="mdl-layout-spacer"></div>
           <!--<a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">help_outline</i><span class="visuallyhidden">Help</span></a>-->
         </nav>
@@ -13,6 +13,18 @@
 
                 <div class="mdl-grid demo-content">
                   <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid content">
+                    <?php
+                      if($this -> session ->flashdata('deletedConc') != NULL){
+                        echo "<div class=\"alert alert-success\" role=\"alert\">";
+                        echo $this->session->flashdata('deletedConc');
+                        echo "</div>";
+                      }
+                      elseif($this -> session ->flashdata('deleteError') != NULL){
+                        echo "<div class=\"alert alert-warning\" role=\"alert\">";
+                        echo $this->session->flashdata('deleteError');
+                        echo "</div>";
+                      }
+                     ?>
                     <div class="mdl-card__supporting-text text">
                       <table class="table table-hover">
                         <thead>
@@ -55,7 +67,7 @@
                                       </td>";
                               endif;
                             ?>
-                            <td>Przyjmij, Skasuj, Edytuj</td>
+                            <td><a href="<?php echo site_url('show_conclusions/delete_conclussion/'); ?><?php echo $row['id_rc']; ?>">Skasuj</a> <a href="">Edytuj</a></td>
                           </tr>
                           <?php } ?>
                         </tbody>
