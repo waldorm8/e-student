@@ -10,16 +10,15 @@ class catalog_model extends CI_Model{
   }
 
   public function get_ways(){
-    /*$this->db->select('*');
-    $this->db->from('speciality');
-    $this->db->join('study_way', 'study_way.sw_id = speciality.sw_id');
-    $query = $this->db->get();*/
-
-
     $this->db->select('*');
     $this->db->from('study_way');
     $query = $this->db->get();
     return($query -> result_array());
   }
-
+  public function dataForJson(){
+    $this->db->select('*');
+    $this->db->from('speciality');
+    $query = $this->db->get();
+    return $query -> result_array();
+  }
 }

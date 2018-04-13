@@ -13,16 +13,38 @@
       <main class="mdl-layout__content mdl-color--grey-100">
                 <div class="mdl-grid demo-content">
                   <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid content">
-                    <datalist id="ways">
+                    <select class="form-control ways">
+                      <option value="0">Wybierz interesujący Cie kierunek studiów.</option>
                       <?php foreach($ways as $row){ ?>
-                      <option value="<?php echo $row['sw_name'];  ?>">
-                      <?php } ?>
-                    </datalist>
-                    <input class="form-control" list="ways" placeholder="Wybierz interesujący Cie kierunek studiów." name="ways">
-                    //powybraniu kierunku wyswietlic informacje na temat specjalizacji i opis
+                        <option value="<?php echo $row['sw_id']; ?>"><?php echo $row['sw_name']; ?></option>
+                      <?php
+                      }
+                      ?>
+                    </select>
                 </div>
               </div>
       </main>
     </div>
-    <script>
+  <script>
+    $(document).ready(function(){
+      $('.ways').on('change', function(){
+        $('.divWays').remove();
+        var sw_id = $(this).val();
+        console.log(sw_id);
+        var html = "";
+        $.getJSON('jsonData.json', function(data){
+          for(i=0;i<data.length;i++){
+            if(data[i]['sw_id'] == sw_id){
+              console.log(data[i]['sp_name']);
+
+              $('<div class="mdl-grid demo-content divWays"><div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid content ways"><h4>'+data[i]['sp_name']+'</h4></div></div>').appendTo('main').fadeIn();
+              $('<p>'+data[i]["sp_describe"]+'</p>').appendTo('.ways');
+            }
+          }
+        })
+        .fail(function(){
+          alert('Wystąpił błąd');
+        });
+      });
+    });
   </script>
