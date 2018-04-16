@@ -38,4 +38,43 @@ class Catalog extends CI_Controller{
 		}
   }
 
+  public function add_ways(){
+    if($this -> session -> userdata('user_id') != NULL && $this -> session -> userdata('role') == 'admin'){
+			$user_id = $this -> session -> userdata('user_id');
+			$this -> session -> set_userdata('page', 'Dodaj kierunki');
+      $this -> load -> helper('form');
+			$this -> load -> view('partials/admin_header');
+			$this -> load -> view('admin_add_ways');
+			$this -> load -> view('partials/admin_footer');
+		}
+		else{
+			redirect('login','refresh');
+		}
+  }
+  public function add_speciality(){
+    if($this -> session -> userdata('user_id') != NULL && $this -> session -> userdata('role') == 'admin'){
+      $user_id = $this -> session -> userdata('user_id');
+      $this -> session -> set_userdata('page', 'Dodaj kierunki');
+      $this -> load -> helper('form');
+
+      $wayData = array(
+        "sw_name" => $this -> input -> post('wayName'),
+        "sw_type" => $this -> input -> post('typeWay'),
+        "d_id" => $this -> input -> post('department')
+      );
+
+
+      $this -> load -> model('catalog_model');
+      $this -> load -> view('partials/admin_header');
+      $this -> load -> view('add_speciality');
+      $this -> load -> view('partials/admin_footer');
+
+
+
+    }
+    else{
+      redirect('login','refresh');
+    }
+  }
+
 }
