@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
-class Show_conclusions extends CI_Controller{
+require 'Recruitment.php';
+class Show_conclusions extends Recruitment{
 
   public function __construct()
   {
@@ -81,8 +81,32 @@ class Show_conclusions extends CI_Controller{
       'rc_math_score' =>$this->input->post('math_score'),
       'rc_english_score' =>$this->input->post('english_score'),
       'rc_add_score'=>$this->input->post('additional_score'),
-      'rc_behavior' =>$this->input->post('behavior_degree')
+      'rc_behavior' =>$this->input->post('behavior_degree'),
+      'rc_points' => 0
     ); // trzeba jeszcze raz odpalic metode przleiczajaca punkty itd i wtedy zapisywac do bazy
+
+    $rates = array(
+        'polish_rate' => 0.6,
+        'polish_wage' => 0.35,
+        'math_rate' => 0.6,
+        'math_wage' => 0.05,
+        'english_rate' => 0.6,
+        'english_wage' => 0.3,
+        'add_rate' => 1,
+        'add_wage' => 0.15
+    );
+
+    $scores = array(
+      'polish' => $this->input->post('polish_score'),
+      'math' => $this->input->post('math_score'),
+      'english' => $this->input->post('english_score'),
+      'additional' => $this->input->post('additional_score')
+    );
+
+    $points = $this -> calculate_points($scores, $rates);
+
+    $data['rc_points'] = $points;
+
     if($this -> Recruitment_model -> edit_conclusion($id_rc, $data)){
       $this->session->set_flashdata('editSucc', "Pomyslnie zeedytowano dane");
       redirect('show_conclusions');

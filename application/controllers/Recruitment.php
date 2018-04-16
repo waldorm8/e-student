@@ -35,7 +35,7 @@ class Recruitment extends CI_Controller{
     }
   }
 
-  private function calculate_points($scores, $rates){
+  public function calculate_points($scores, $rates){
     /*
       polish*0.6*waga(0.35)
       math*0,6*waga(0,05)
