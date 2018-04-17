@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 09 Kwi 2018, 15:43
+-- Czas generowania: 17 Kwi 2018, 13:24
 -- Wersja serwera: 10.1.30-MariaDB
 -- Wersja PHP: 7.2.2
 
@@ -72,9 +72,7 @@ INSERT INTO `messages` (`mess_id`, `mess_text`, `mess_title`, `mess_date`, `mess
 (9, 'sddasdasdasd', 'asdadasdasd', '2018-04-07 15:26:06', 12, 12),
 (10, 'do wldorm123', 'do waldorm123', '2018-04-07 15:28:23', 9, 12),
 (11, 'teststest', 'asdasdatest', '2018-04-09 09:21:39', 12, 11),
-(12, 'sdasdasdad', 'sdada', '2018-04-09 10:20:53', 12, 12),
-(14, 'wysyalnie za pomoca loginu', 'test wysylanie z apomoca loginu', '2018-04-09 10:36:07', 9, 12),
-(17, 'wiadomosc od administratora', 'wiadomosc od administratora', '2018-04-09 11:47:20', 12, 14);
+(14, 'wysyalnie za pomoca loginu', 'test wysylanie z apomoca loginu', '2018-04-09 10:36:07', 9, 12);
 
 -- --------------------------------------------------------
 
@@ -95,7 +93,8 @@ CREATE TABLE `news` (
 
 INSERT INTO `news` (`n_id`, `n_title`, `n_date`, `n_text`) VALUES
 (12, 'sdfsadfasdfdsf', '2018-03-10 17:03:16', '<p>asdasdasdasdasdadasdsadasdada zeedytowanojeszcze raz</p><p>asdasdasdasd</p>'),
-(13, 'asdasdadasda', '2018-03-16 14:03:41', '<ul><li><a href=\"http://google.pl\">google</a>as<strong>dadadadadasdadadasdasdasdasdasdas<em>dadasdsada</em></strong><em>asdadasdadadsadad</em>asdasdasdadadads</li><li>vsdfasdfsadf<a target=\"_blank\" href=\"http://google.pl\">google.pl</a></li></ul>');
+(13, 'asdasdadasda', '2018-04-17 09:04:36', '<ul><li><a href=\"http://google.pl\">google</a>as<strong>dadadadadasdadadasdasdasdasdasdas<em>dadasdsada</em></strong><em>asdadasdadadsadad</em>asdasdasdadadads</li><li>vsdfasdfsadf<a target=\"_blank\" href=\"http://google.pl\">google.plsdasd</a></li></ul>'),
+(14, 'jhgjhgjhgj', '2018-04-17 09:04:50', '<p>jhgjhgjjg</p>');
 
 -- --------------------------------------------------------
 
@@ -127,10 +126,10 @@ CREATE TABLE `recruitment_conclusion` (
 --
 
 INSERT INTO `recruitment_conclusion` (`id_rc`, `rc_polish_degree`, `rc_math_degree`, `rc_english_degree`, `rc_st_additional`, `rc_average_degree`, `rc_polish_score`, `rc_math_score`, `rc_english_score`, `rc_add_score`, `rc_behavior`, `rc_points`, `rc_flag`, `rc_date`, `st_id`, `sw_id`) VALUES
-(20, 3, 5, 4, 5, 4, 45, 89, 98, 67, 5, 39.81, 'o', '2018-03-17', 12, 4),
-(21, 3, 5, 4, 5, 4, 45, 89, 98, 67, 5, 39.81, 'o', '2018-03-17', 12, 5),
-(22, 3, 4, 5, 3, 3.45, 34, 89, 67, 45, 4, 28.62, 'o', '2018-03-17', 9, 4),
-(23, 3, 4, 5, 4, 3.56, 45, 65, 78, 34, 3, 30.54, 'o', '2018-03-17', 11, 10);
+(20, 3, 5, 4, 5, 4, 80, 89, 98, 67, 5, 39.81, 'p', '2018-03-17', 12, 4),
+(21, 3, 5, 4, 5, 4, 45, 89, 98, 67, 5, 39.81, 'p', '2018-03-17', 12, 5),
+(23, 5, 5, 5, 5, 3.56, 45, 65, 78, 34, 3, 30.54, 'o', '2018-03-17', 11, 10),
+(24, 5, 5, 5, 5, 3.32, 100, 100, 100, 0, 6, 42, 'o', '2018-04-13', 12, 14);
 
 -- --------------------------------------------------------
 
@@ -197,7 +196,7 @@ CREATE TABLE `student` (
 INSERT INTO `student` (`st_id`, `st_login`, `st_password`, `st_name`, `st_sec_name`, `st_surname`, `st_city`, `st_street`, `st_house_number`, `st_zipcode`, `st_pesel`, `st_birth_date`, `st_photo`, `st_indeks`, `st_start_date`, `st_email`, `st_role`, `st_bad_login_count`, `st_date_bad_login`, `study_way_sw_id`) VALUES
 (9, 'waldorm123', '$2y$10$R3dkxMlUT3UnZzlXhjDQSO9//wUYKMrGT7KeGQ6Hrefjvt1.EsVZu', 'Janek', NULL, 'Wisniewski', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'waldorm123@gmail.com', NULL, 0, NULL, NULL),
 (11, 'test123', '$2y$10$kXcpmziEnBHxWafBzG9T.udXIEyce/smUXPEPMv8Lgr8Ehihx4KdO', 'test123', NULL, 'test123', NULL, NULL, NULL, NULL, NULL, NULL, 'upload/avatars/11/73f5f6ccaafbb0141b1aaa9b2b11de96.jpg', NULL, NULL, 'test123@gmail.com', NULL, 0, NULL, NULL),
-(12, 'waldorm', '$2y$10$4STFe6V1ciE26Jqi55Es5ehs.mYg9Z.6h997.TwwSLgEkbzBdo5i6', 'Arkadiusz', NULL, 'Wiśniewski', 'Tłuchowo', '3 Maja', '4', '87605', '94200300000', '1994-03-20', 'upload/avatars/12/b73120908bfb22c79c75dc532d58f203.jpg', 15957, NULL, 'waldorm8@gmail.com', NULL, 0, NULL, NULL),
+(12, 'waldorm', '$2y$10$4STFe6V1ciE26Jqi55Es5ehs.mYg9Z.6h997.TwwSLgEkbzBdo5i6', 'Arkadiusz', NULL, 'Wiśniewski', 'Tłuchowo', '3 Maja', '4', '87605', '94200300000', '1994-03-20', 'upload/avatars/12/38d5fc3ba1141d9d9593ae874a8075ea.jpg', 15957, NULL, 'waldorm8@gmail.com', NULL, 0, NULL, NULL),
 (13, 'testowe123', '$2y$10$t6zXtiQF79Op8C1//qdoy.c8Q8v7UYbgo.AE9aU2kQKje6HU9a7.G', 'testowe', NULL, 'testowe', 'Płock', 'jachowicza', '3', '87605', '12345678911', '2017-02-12', NULL, 15957, NULL, 'test@gmail.com', NULL, 3, '2018-04-09 09:20:21', NULL),
 (14, 'administrator', '$2y$10$kAflxsjcQprKo0K9jmp4ietSamKV0o9NmS86VU4o3PhCGJXhsGxaS', 'admin', 'admin', 'admin', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ADMINISTRATOR', 'a', 0, NULL, NULL);
 
@@ -292,25 +291,25 @@ ALTER TABLE `departements`
 -- AUTO_INCREMENT dla tabeli `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `mess_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `mess_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT dla tabeli `news`
 --
 ALTER TABLE `news`
-  MODIFY `n_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `n_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT dla tabeli `recruitment_conclusion`
 --
 ALTER TABLE `recruitment_conclusion`
-  MODIFY `id_rc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id_rc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT dla tabeli `speciality`
 --
 ALTER TABLE `speciality`
-  MODIFY `sp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `sp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT dla tabeli `student`
@@ -322,7 +321,7 @@ ALTER TABLE `student`
 -- AUTO_INCREMENT dla tabeli `study_way`
 --
 ALTER TABLE `study_way`
-  MODIFY `sw_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `sw_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- Ograniczenia dla zrzutów tabel
