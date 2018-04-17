@@ -21,4 +21,22 @@ class catalog_model extends CI_Model{
     $query = $this->db->get();
     return $query -> result_array();
   }
+  public function save_way($data){
+    if($this->db->insert('study_way', $data)):
+      $this -> db -> select('sw_id');
+      $this -> db -> from('study_way');
+      $this-> db ->where('sw_name', $data['sw_name']);
+      $query = $this -> db -> get();
+      return($query -> result_array());
+    else:
+      return 0;
+    endif;
+  }
+  public function save_spec($data){
+    if($this->db->insert('speciality', $data)):
+      return 1;
+    else:
+      return 0;
+    endif;
+  }
 }

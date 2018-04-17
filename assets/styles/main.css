@@ -215,7 +215,7 @@ input.valid, textarea.valid{
 img.visibility{
     cursor:pointer;
 }
-@media screen and (max-width: 1440px) {
+@media screen and (max-width: 1800px) {
     .left-box{
         height:450px;
         width:300px;
