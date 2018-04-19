@@ -117,7 +117,7 @@
                   <input required type="number" min="30" max="100" placeholder="zakres: 30-100" name="math_score" class="form-control">
                   <label for="">Wynik z języka angielskiego</label>
                   <input required type="number" min="30" max="100" placeholder="zakres: 30-100" name="english_score" class="form-control">
-                  <label for="">Wynik z przedmiotu dodatkowego (matematyka-poziom rozszerzony lub informatyka lub fizyka)</label>
+                  <label for="">Wynik z przedmiotu dodatkowego (zależnie od kierunku)</label>
                   <input required type="number" min="0" max="100" class="form-control" name="additional_score" placeholder="Jeśli nie pisano wpisz 0">
                   <div class="form-check">
                   </div>
