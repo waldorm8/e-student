@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 17 Kwi 2018, 13:24
+-- Czas generowania: 27 Kwi 2018, 08:54
 -- Wersja serwera: 10.1.30-MariaDB
 -- Wersja PHP: 7.2.2
 
@@ -92,9 +92,10 @@ CREATE TABLE `news` (
 --
 
 INSERT INTO `news` (`n_id`, `n_title`, `n_date`, `n_text`) VALUES
-(12, 'sdfsadfasdfdsf', '2018-03-10 17:03:16', '<p>asdasdasdasdasdadasdsadasdada zeedytowanojeszcze raz</p><p>asdasdasdasd</p>'),
-(13, 'asdasdadasda', '2018-04-17 09:04:36', '<ul><li><a href=\"http://google.pl\">google</a>as<strong>dadadadadasdadadasdasdasdasdasdas<em>dadasdsada</em></strong><em>asdadasdadadsadad</em>asdasdasdadadads</li><li>vsdfasdfsadf<a target=\"_blank\" href=\"http://google.pl\">google.plsdasd</a></li></ul>'),
-(14, 'jhgjhgjhgj', '2018-04-17 09:04:50', '<p>jhgjhgjjg</p>');
+(15, 'Lorem ipsum dolor sit amet,', '2018-04-27 08:04:18', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id ex felis. Donec pulvinar arcu eget tempus ullamcorper. Etiam dictum nibh non aliquam accumsan. Fusce nibh tortor, rutrum ac augue ac, hendrerit interdum quam. Curabitur convallis sollicitudin pharetra. Donec lacinia erat sed malesuada commodo. Duis congue odio metus, finibus feugiat libero maximus id. Ut congue dictum nisl eu tempor. Aliquam ac pretium velit.</p>'),
+(16, 'Integer varius sapien sed auctor porttitor.', '2018-04-27 08:04:49', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus facilisis nunc pretium diam dapibus vehicula non nec metus. Proin sit amet nulla tortor. Duis pretium ex at nulla gravida, non posuere urna vulputate. Etiam sed faucibus lorem. Duis libero lectus, consequat ut condimentum id, euismod non leo. Praesent vitae volutpat quam, ac sagittis est. Curabitur tristique molestie placerat. Morbi eu turpis congue neque rutrum laoreet vel vitae nisi. Praesent eu diam eu nisl rutrum lobortis sit amet a est. Aliquam aliquet fringilla odio vel imperdiet. Nam efficitur accumsan urna eu elementum. Phasellus ultrices, lorem at posuere ultricies, mauris enim dictum ipsum, et semper enim odio et nisl. Morbi accumsan dui ut nulla aliquam imperdiet. In sit amet sem diam. Morbi eleifend nisl aliquet nisl vehicula mattis. Nulla congue nulla posuere eleifend maximus.</p>'),
+(17, 'Morbi accumsan dui ut nulla aliquam', '2018-04-27 08:04:09', '<p>Integer varius sapien sed auctor porttitor. In egestas condimentum nunc. Praesent ultrices accumsan nulla, a viverra libero faucibus quis. Fusce id scelerisque dui. Duis nec turpis sit amet velit interdum cursus nec vel ante. Fusce vitae condimentum purus. Fusce consectetur condimentum enim, in vestibulum est laoreet sit amet. Suspendisse potenti. Suspendisse potenti. Curabitur mattis semper nulla vitae interdum. In ullamcorper urna et quam porttitor, id malesuada nibh rutrum. Donec pharetra mauris sem, sit amet semper orci ornare fringilla. Nullam accumsan dui eget aliquet egestas. Maecenas non velit aliquet, bibendum lacus pretium, tempus dolor. Aenean gravida pharetra ligula et accumsan.</p>'),
+(18, 'Nam vehicula purus metus, at tincidunt enim eleifend at.', '2018-04-27 08:04:34', '<p>Donec tempor lacinia mi, eget laoreet nisi dapibus sed. Vestibulum dapibus lectus ac velit lacinia, a venenatis urna molestie. Quisque a velit tempus, vestibulum risus a, mollis nisl. Nunc eu congue neque. Sed varius, metus at viverra fringilla, velit ligula sollicitudin ante, vel facilisis erat eros vitae velit. Duis aliquam, felis in tincidunt suscipit, arcu lorem imperdiet ligula, at tempor augue lacus at felis. Ut fermentum lectus at lobortis ultricies. Praesent consectetur, ex et malesuada pretium, risus tellus aliquet nibh, quis venenatis lacus tortor ac neque. Nulla dapibus in sapien tincidunt placerat. Aliquam tempor ligula ac nisi pharetra, at blandit sem finibus. Fusce eros neque, finibus condimentum enim eget, feugiat iaculis diam.</p>');
 
 -- --------------------------------------------------------
 
@@ -129,7 +130,9 @@ INSERT INTO `recruitment_conclusion` (`id_rc`, `rc_polish_degree`, `rc_math_degr
 (20, 3, 5, 4, 5, 4, 80, 89, 98, 67, 5, 39.81, 'p', '2018-03-17', 12, 4),
 (21, 3, 5, 4, 5, 4, 45, 89, 98, 67, 5, 39.81, 'p', '2018-03-17', 12, 5),
 (23, 5, 5, 5, 5, 3.56, 45, 65, 78, 34, 3, 30.54, 'o', '2018-03-17', 11, 10),
-(24, 5, 5, 5, 5, 3.32, 100, 100, 100, 0, 6, 42, 'o', '2018-04-13', 12, 14);
+(24, 5, 5, 5, 5, 3.32, 100, 100, 100, 0, 6, 42, 'o', '2018-04-13', 12, 14),
+(25, 4, 2, 3, 5, 4.32, 78, 54, 78, 54, 4, 40.14, 'o', '2018-04-27', 15, 11),
+(26, 4, 2, 3, 5, 4.32, 78, 54, 78, 78, 4, 43.74, 'o', '2018-04-27', 15, 14);
 
 -- --------------------------------------------------------
 
@@ -198,7 +201,9 @@ INSERT INTO `student` (`st_id`, `st_login`, `st_password`, `st_name`, `st_sec_na
 (11, 'test123', '$2y$10$kXcpmziEnBHxWafBzG9T.udXIEyce/smUXPEPMv8Lgr8Ehihx4KdO', 'test123', NULL, 'test123', NULL, NULL, NULL, NULL, NULL, NULL, 'upload/avatars/11/73f5f6ccaafbb0141b1aaa9b2b11de96.jpg', NULL, NULL, 'test123@gmail.com', NULL, 0, NULL, NULL),
 (12, 'waldorm', '$2y$10$4STFe6V1ciE26Jqi55Es5ehs.mYg9Z.6h997.TwwSLgEkbzBdo5i6', 'Arkadiusz', NULL, 'Wiśniewski', 'Tłuchowo', '3 Maja', '4', '87605', '94200300000', '1994-03-20', 'upload/avatars/12/38d5fc3ba1141d9d9593ae874a8075ea.jpg', 15957, NULL, 'waldorm8@gmail.com', NULL, 0, NULL, NULL),
 (13, 'testowe123', '$2y$10$t6zXtiQF79Op8C1//qdoy.c8Q8v7UYbgo.AE9aU2kQKje6HU9a7.G', 'testowe', NULL, 'testowe', 'Płock', 'jachowicza', '3', '87605', '12345678911', '2017-02-12', NULL, 15957, NULL, 'test@gmail.com', NULL, 3, '2018-04-09 09:20:21', NULL),
-(14, 'administrator', '$2y$10$kAflxsjcQprKo0K9jmp4ietSamKV0o9NmS86VU4o3PhCGJXhsGxaS', 'admin', 'admin', 'admin', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ADMINISTRATOR', 'a', 0, NULL, NULL);
+(14, 'administrator', '$2y$10$kAflxsjcQprKo0K9jmp4ietSamKV0o9NmS86VU4o3PhCGJXhsGxaS', 'admin', 'admin', 'admin', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ADMINISTRATOR', 'a', 0, NULL, NULL),
+(15, 'stanislaw123', '$2y$10$SwqMDJxhdAaBJrBgiNrO5uppQXXlF8u6KYDPCTrYj134dGiLl55ty', 'Stanisław', NULL, 'Kowalski', 'Płock', '3 Maja', '4', '54625', '52136987455', '1992-05-13', NULL, 41123, NULL, 'janek@gmail.com', NULL, 0, NULL, NULL),
+(16, 'janusznowak', '$2y$10$lnuVR.RKrrKYcV89QRi3uubNp.eIs9O6sskpUdAc6T/BOmikQoxZS', 'Janusz', NULL, 'Nowak', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'janusznowak@wp.pl', NULL, 2, '2018-04-27 08:49:49', NULL);
 
 -- --------------------------------------------------------
 
@@ -297,31 +302,31 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT dla tabeli `news`
 --
 ALTER TABLE `news`
-  MODIFY `n_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `n_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT dla tabeli `recruitment_conclusion`
 --
 ALTER TABLE `recruitment_conclusion`
-  MODIFY `id_rc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_rc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT dla tabeli `speciality`
 --
 ALTER TABLE `speciality`
-  MODIFY `sp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `sp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT dla tabeli `student`
 --
 ALTER TABLE `student`
-  MODIFY `st_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `st_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT dla tabeli `study_way`
 --
 ALTER TABLE `study_way`
-  MODIFY `sw_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `sw_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Ograniczenia dla zrzutów tabel
